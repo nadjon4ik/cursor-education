@@ -9,14 +9,13 @@ const price = Number(
 );
 
 const inputDiscount = Number(
-  prompt('Введіть знижку на товар для обчислення прибутку:')
+  prompt('Введіть знижку на товар для обчислення прибутку:', 10)
 );
-console.log(
-  `Максимальна ціна: ${Math.max(priceOfSuger, priceOfSalt, priceOfPotato)} грн.`
-);
-console.log(
-  `Мінімальна ціна: ${Math.min(priceOfSuger, priceOfSalt, priceOfPotato)} грн. `
-);
+
+const arr = [priceOfSuger, priceOfSalt, priceOfPotato];
+
+console.log(`Максимальна ціна: ${Math.max(...arr)} грн.`);
+console.log(`Мінімальна ціна: ${Math.min(...arr)} грн. `);
 
 const sum = priceOfSuger + priceOfSalt + priceOfPotato;
 console.log(`Вартість всіх товарів: ${sum} грн.`);
@@ -40,12 +39,7 @@ console.log(
 console.log(
   `Ви заплатили - ${amount}. Ваша решта складає: ${amount - sum} грн.`
 );
-console.log(
-  `Середнє значення цін: ${(
-    (priceOfSuger + priceOfSalt + priceOfPotato) /
-    3
-  ).toFixed(2)} грн.`
-);
+console.log(`Середнє значення цін: ${(sum / 3).toFixed(2)} грн.`);
 console.log(
   `Сума до оплати враховуючи знижку ${discount}% складає ${(
     sum -
