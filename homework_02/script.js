@@ -1,21 +1,29 @@
-const n = checkNumber(parseInt(prompt('Введіть,будь-ласка, N'), 10), 'N');
-const m = checkNumber(parseInt(prompt('Введіть,будь-ласка, M'), 10), 'M');
-const evenSwitch = confirm('Пропускати парні числа?');
+const n = inputNumber('N');
+const m = inputNumber('M');
+const skipEven = confirm('Пропускати парні числа?');
+
+function inputNumber(name) {
+  return checkNumber(showInputPrompt(name), name);
+}
+
+function showInputPrompt(name) {
+  return parseInt(prompt(`Введіть,будь-ласка, ${name}`), 10);
+}
 
 function checkNumber(num, name) {
   while (isNaN(num) || num < 1) {
     alert('Будь-ласка,введіть дійсне число');
-    num = parseInt(prompt(`Введіть,будь-ласка, ${name}`));
+    num = showInputPrompt(name);
   }
   return num;
 }
+
 function sumRange(from, to) {
   let sum = 0;
   for (let i = from; i <= to; i++) {
-    if (evenSwitch == true && i % 2 == 0) {
-      continue;
+    if (!skipEven || i % 2 !== 0) {
+      sum += i;
     }
-    sum += i;
   }
   return sum;
 }
