@@ -20,6 +20,8 @@ const inputDiscount = Number(
   prompt('Введіть знижку на товар для обчислення прибутку:', 10)
 );
 
+confirm('Запустіть консоль (F12)');
+
 console.log(`Максимальна ціна: ${Math.max(...arr)} грн.`);
 console.log(`Мінімальна ціна: ${Math.min(...arr)} грн. `);
 console.log(`Вартість всіх товарів: ${sum} грн.`);
