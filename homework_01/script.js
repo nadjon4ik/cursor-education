@@ -27,11 +27,7 @@ console.log(`Максимальна ціна: ${Math.max(...arr)} грн.
 Мінімальна ціна: ${Math.min(...arr)} грн.
 Вартість всіх товарів: ${sum} грн.
 Вартість всіх товарів без копійок: ${sumWithoutCoins} грн.
-Сума товару в сотнях: ${
-  Math.floor(sum) % 100 >= 50
-    ? Math.floor(sum) - (Math.floor(sum) % 100) + 100
-    : Math.floor(sum) - (Math.floor(sum) % 100)
-}
+Сума товару в сотнях: ${Math.round(sum / 100) * 100}
 Сума всіх товарів парна? ${evenSum ? evenSum : evenSum}
 Ви заплатили - ${amount}. Ваша решта складає: ${amount - sum} грн.
 Середнє значення цін: ${(sum / 3).toFixed(2)} грн.
