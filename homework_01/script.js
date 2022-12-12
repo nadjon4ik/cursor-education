@@ -23,8 +23,8 @@ confirm('Запустіть консоль (F12)');
 
 const evenSum = sumWithoutCoins % 2 == 0;
 
-console.log(`Максимальна ціна: ${Math.max(...arr)} грн.
-Мінімальна ціна: ${Math.min(...arr)} грн.
+console.log(`Максимальна ціна: ${Math.max(...arr).toFixed(2)} грн.
+Мінімальна ціна: ${Math.min(...arr).toFixed(2)} грн.
 Вартість всіх товарів: ${sum.toFixed(2)} грн.
 Вартість всіх товарів без копійок: ${sumWithoutCoins} грн.
 Сума товару в сотнях: ${Math.round(sum / 100) * 100}
