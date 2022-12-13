@@ -23,7 +23,6 @@ function showInputPrompt(name) {
   if (isNaN(userInput)) {
     return confirmCancelInput(name);
   }
-
   return repeatInput(userInput, name);
 }
 
