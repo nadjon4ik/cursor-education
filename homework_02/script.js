@@ -1,13 +1,15 @@
 main();
 
 function main() {
-  let n = showInputPrompt('N, де N - початок діапазону');
+  let n = showInputPrompt('N, де N - число,що задає початок діапазону');
   if (n == null) {
     alert('Обчислити додавання неможливо!');
     return;
   }
 
-  let m = showInputPrompt('M, де M - кінець діапазону');
+  let m = showInputPrompt(
+    `M, де M - число, що вказує на кінець діапазону (введіть більше за ${n})`
+  );
   if (m == null) {
     alert('Обчислити додавання неможливо!');
     return;
