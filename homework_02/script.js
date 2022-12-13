@@ -18,14 +18,6 @@ function main() {
   alert(`Результатом складання чисел від ${n} до ${m} є ${sum}`);
 }
 
-function confirmCancelInput(name) {
-  const skipConfirm = confirm('Ви дійсно хочете скасувати введення числа?');
-  if (!skipConfirm) {
-    return showInputPrompt(name);
-  }
-  return null;
-}
-
 function showInputPrompt(name) {
   const userInput = parseInt(prompt(`Введіть,будь-ласка ${name}`), 10);
   if (isNaN(userInput)) {
@@ -33,6 +25,14 @@ function showInputPrompt(name) {
   }
 
   return repeatInput(userInput, name);
+}
+
+function confirmCancelInput(name) {
+  const skipConfirm = confirm('Ви дійсно хочете скасувати введення числа?');
+  if (!skipConfirm) {
+    return showInputPrompt(name);
+  }
+  return null;
 }
 
 function repeatInput(num, name) {
