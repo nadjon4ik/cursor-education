@@ -1,5 +1,5 @@
-const n = inputNumber('N');
-const m = inputNumber('M');
+const n = inputNumber('N, де N - початок діапазону');
+const m = inputNumber('M, де M - кінець діапазону');
 const skipEven = confirm('Пропускати парні числа?');
 
 function inputNumber(name) {
