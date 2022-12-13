@@ -28,4 +28,4 @@ function sumRange(from, to) {
   return sum;
 }
 
-console.log(sumRange(n, m));
+alert(`Результатом складання чисел від ${n} до ${m} є ${sumRange(n, m)}`);
