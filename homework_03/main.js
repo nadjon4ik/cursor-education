@@ -170,7 +170,7 @@ const list = [
     funcName: 'GetRandomPassword',
     action: getRandomPassword,
     args: [[8]],
-    validation: ['no-validation'],
+    validation: ['number'],
   },
   {
     content: 'Функція №9(Видалення задачної букви із речення).',
