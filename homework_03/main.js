@@ -27,10 +27,11 @@ function getRandomNumber(n, m) {
 }
 
 function countLetter(lett, word) {
-  const newWord = word.toLowerCase();
+  lett = lett.toLowerCase();
+  word = word.toLowerCase();
   let count = 0;
-  for (let i = 0; i < newWord.length; i++) {
-    if (newWord[i] == lett) {
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] == lett) {
       count++;
     }
   }
