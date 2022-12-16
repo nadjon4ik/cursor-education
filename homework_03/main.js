@@ -170,7 +170,7 @@ const list = [
     funcName: 'GetRandomPassword',
     action: getRandomPassword,
     args: [[8]],
-    validation: ['number'],
+    validation: ['no-validation'],
   },
   {
     content: 'Функція №9(Видалення задачної букви із речення).',
@@ -181,7 +181,7 @@ const list = [
   },
   {
     content: 'Функція №10(Паліндром?).',
-    funcName: 'IsPolyndrom',
+    funcName: 'IsPalyndrom',
     action: isPalyndrom,
     args: [['я несу гусеня']],
     validation: ['string'],
@@ -200,8 +200,10 @@ function createElement(item) {
   const template = document
     .getElementById('item-template')
     .content.cloneNode(true);
+
   const title = template.querySelector('.content');
   title.textContent = item.content;
+
   const funcName = template.querySelector('.func_name');
   funcName.textContent = item.funcName;
   const dyn = template.querySelector('.dynamic');
@@ -224,10 +226,12 @@ function createElement(item) {
   const submit = template.querySelector('[type=submit]');
   const output = template.querySelector('.st-output');
   const error = template.querySelector('.error');
+
   submit.addEventListener('click', (e) => {
     e.preventDefault();
     error.innerHTML = '';
     const inputs = [...dyn.querySelectorAll('input')];
+
     const values = inputs.map((input, i) => {
       switch (item.validation[i]) {
         case 'number': {
@@ -248,6 +252,7 @@ function createElement(item) {
           return input.value;
       }
     });
+
     if (error.textContent.length === 0) {
       const result = item.action(...values);
       output.textContent = String(result);
@@ -262,6 +267,7 @@ function createElement(item) {
 for (let item of list) {
   wrapper.appendChild(createElement(item));
 }
+
 const btnShowModal = document.querySelectorAll('.show-modal');
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
