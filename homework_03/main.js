@@ -19,7 +19,7 @@ function formatFirstLetterName(str) {
 }
 
 function salaryIncludTax(value) {
-  return (value - value * (19.5 / 100)).toFixed(2);
+  return Math.floor(value - value * (19.5 / 100));
 }
 
 function getRandomNumber(n, m) {
