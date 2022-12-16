@@ -61,8 +61,11 @@ function convertCurrency(value, exch) {
 
 //генерація випадкового паролю
 // len - довжина паролю, що задається користувачем
-function getRandomPassword(len = 8) {
+function getRandomPassword(len) {
   let s = "";
+  if (len == "") {
+    len = 8;
+  }
   for (let i = 0; i < len; ++i) {
     s += Math.floor(Math.random() * 10);
   }
@@ -117,49 +120,49 @@ const list = [
     funcName: "GetMaxDigit",
     action: getMaxDigit,
     args: [[]],
-    dataType: ["number"],
+    validation: ["number"],
   },
   {
     content: "Функція №2 (Функція №2 (Піднесення числа до степеня).",
     funcName: "CalcPow",
     action: calcPow,
     args: [[], []],
-    dataType: ["number", "number"],
+    validation: ["number", "number"],
   },
   {
     content: "Функція №3 (Форматування імені користувача).",
     funcName: "FormatFirstLetterName",
     action: formatFirstLetterName,
     args: [[]],
-    dataType: ["string"],
+    validation: ["string"],
   },
   {
     content: "Функція №4(Обчислнння заробітньої плати).",
     funcName: "SalaryIncludTax",
     action: salaryIncludTax,
     args: [[]],
-    dataType: ["number"],
+    validation: ["number"],
   },
   {
     content: "Функція №5(Генерування випадкового цілого числа).",
     funcName: "GetRandomNumber",
     action: getRandomNumber,
     args: [[], []],
-    dataType: ["number", "number"],
+    validation: ["number", "number"],
   },
   {
     content: "Функція №6(Розрахунок повторів букви у слові).",
     funcName: "CountLetter",
     action: countLetter,
     args: [[], []],
-    dataType: ["string", "string"],
+    validation: ["string", "string"],
   },
   {
     content: "Функція №7(Конвертація долару в гривні та навпаки).",
     funcName: "ConvertCurrency",
     action: convertCurrency,
     args: [[], []],
-    dataType: ["string", "string"],
+    validation: ["string", "string"],
   },
   {
     content:
@@ -167,31 +170,30 @@ const list = [
     funcName: "GetRandomPassword",
     action: getRandomPassword,
     args: [[]],
-    dataType: ["number"],
+    validation: ["no-validation"],
   },
   {
     content: "Функція №9(Видалення задачної букви із речення).",
     funcName: "DeleteLetters",
     action: deleteLetters,
     args: [[], []],
-    dataType: ["string", "string"],
+    validation: ["string", "string"],
   },
   {
     content: "Функція №10(Паліндром?).",
     funcName: "IsPolyndrom",
     action: isPalyndrom,
     args: [[]],
-    dataType: ["string"],
+    validation: ["string"],
   },
   {
     content: "Функція №11(Видалення букв, що повторюються).",
     funcName: "DeleteDuplicateLetter",
     action: deleteDuplicateLetter,
     args: [[]],
-    dataType: ["string"],
+    validation: ["string"],
   },
 ];
-
 const wrapper = document.querySelector(".wrapper");
 
 function createElement(item) {
@@ -208,7 +210,8 @@ function createElement(item) {
   icon.dataset.code = encodeURIComponent(item.action.toString());
   icon.addEventListener("click", function () {
     const code = decodeURIComponent(this.dataset.code);
-    alert(code);
+    const codeInfo = document.querySelector(".info-code");
+    codeInfo.textContent = code;
   });
 
   for (let i = 0; i < item.action.length; ++i) {
@@ -226,7 +229,7 @@ function createElement(item) {
     error.innerHTML = "";
     const inputs = [...dyn.querySelectorAll("input")];
     const values = inputs.map((input, i) => {
-      switch (item.dataType[i]) {
+      switch (item.validation[i]) {
         case "number": {
           if (!/^[+-]?[0-9]+$/.test(input.value)) {
             error.innerHTML += `invalid integer "${input.value}" for argument ${i}<br>`;
@@ -240,6 +243,13 @@ function createElement(item) {
             return input.value;
           }
           return parseFloat(input.value);
+        }
+        case "string": {
+          if (!/^([a-z])+$/gi.test(input.value)) {
+            error.innerHTML += `invalid string "${input.value}" for argument ${i}<br>`;
+            return input.value;
+          }
+          return input.value;
         }
         default:
           return input.value;
@@ -259,7 +269,6 @@ function createElement(item) {
 for (let item of list) {
   wrapper.appendChild(createElement(item));
 }
-
 const btnShowModal = document.querySelectorAll(".show-modal");
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
@@ -271,7 +280,7 @@ const closeModal = function () {
 };
 
 const openModal = function () {
-  codeContext.textContent = this.dataset.code;
+  // codeContext.textContent = this.dataset.code;
   modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
 };
