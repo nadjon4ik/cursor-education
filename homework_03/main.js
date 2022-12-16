@@ -5,7 +5,6 @@ function getMaxDigit(maxValue) {
     .map((item) => parseInt(item, 10));
   return Math.max(...arr);
 }
-console.log(maxValue.value);
 
 function calcPow(num, pow) {
   let result = 1;
@@ -96,19 +95,20 @@ function deleteDuplicateLetter(str) {
     }
   }
   return newStr;
-}
 
-function remChar(str, ch) {
-  return str.replaceAll(ch, "");
-}
-
-function matchChar(str, ch) {
-  let count = 0;
-  for (let i = 0; i < str.length; i++) {
-    str[i] === ch ? ++count : count;
+  function remChar(str, ch) {
+    return str.replaceAll(ch, "");
   }
-  return count > 1 ? true : false;
+
+  function matchChar(str, ch) {
+    let count = 0;
+    for (let i = 0; i < str.length; i++) {
+      str[i] === ch ? ++count : count;
+    }
+    return count > 1 ? true : false;
+  }
 }
+
 //end
 //output
 const list = [
@@ -117,49 +117,49 @@ const list = [
     funcName: "GetMaxDigit",
     action: getMaxDigit,
     args: [[]],
-    dataType: "number",
+    dataType: ["number"],
   },
   {
     content: "Функція №2 (Функція №2 (Піднесення числа до степеня).",
     funcName: "CalcPow",
     action: calcPow,
     args: [[], []],
-    dataType: "number",
+    dataType: ["number", "number"],
   },
   {
     content: "Функція №3 (Форматування імені користувача).",
     funcName: "FormatFirstLetterName",
     action: formatFirstLetterName,
     args: [[]],
-    dataType: "string",
+    dataType: ["string"],
   },
   {
     content: "Функція №4(Обчислнння заробітньої плати).",
     funcName: "SalaryIncludTax",
     action: salaryIncludTax,
     args: [[]],
-    dataType: "number",
+    dataType: ["number"],
   },
   {
     content: "Функція №5(Генерування випадкового цілого числа).",
     funcName: "GetRandomNumber",
     action: getRandomNumber,
     args: [[], []],
-    dataType: "number",
+    dataType: ["number", "number"],
   },
   {
     content: "Функція №6(Розрахунок повторів букви у слові).",
     funcName: "CountLetter",
     action: countLetter,
     args: [[], []],
-    dataType: "string",
+    dataType: ["string", "string"],
   },
   {
     content: "Функція №7(Конвертація долару в гривні та навпаки).",
     funcName: "ConvertCurrency",
     action: convertCurrency,
     args: [[], []],
-    dataType: "string",
+    dataType: ["string", "string"],
   },
   {
     content:
@@ -167,113 +167,98 @@ const list = [
     funcName: "GetRandomPassword",
     action: getRandomPassword,
     args: [[]],
-    dataType: "number",
+    dataType: ["number"],
   },
   {
     content: "Функція №9(Видалення задачної букви із речення).",
     funcName: "DeleteLetters",
     action: deleteLetters,
     args: [[], []],
-    dataType: "string",
+    dataType: ["string", "string"],
   },
   {
     content: "Функція №10(Паліндром?).",
     funcName: "IsPolyndrom",
-    action: isPolyndrom,
+    action: isPalyndrom,
     args: [[]],
-    dataType: "string",
+    dataType: ["string"],
   },
   {
     content: "Функція №11(Видалення букв, що повторюються).",
-    funcName: "GetMaxDigit",
-    action: DeleteDuplicateLetter,
+    funcName: "DeleteDuplicateLetter",
+    action: deleteDuplicateLetter,
     args: [[]],
-    dataType: "string",
+    dataType: ["string"],
   },
 ];
-const btnCalcDigit = document
-  .querySelector("#btnCalcDigit")
-  .addEventListener("click", () => {
-    const maxValue = document.querySelector("#maxValue");
-    const output = document.querySelector(".output_1");
-    const result = getMaxDigit(maxValue.value);
-    return (output.textContent = result);
+
+const wrapper = document.querySelector(".wrapper");
+
+function createElement(item) {
+  const template = document
+    .getElementById("item-template")
+    .content.cloneNode(true);
+  const title = template.querySelector(".content");
+  title.textContent = item.content;
+  const funcName = template.querySelector(".func_name");
+  funcName.textContent = item.funcName;
+  const dyn = template.querySelector(".dynamic");
+
+  const icon = template.querySelector(".st-icon");
+  icon.dataset.code = encodeURIComponent(item.action.toString());
+  icon.addEventListener("click", function () {
+    const code = decodeURIComponent(this.dataset.code);
+    alert(code);
   });
 
-const btnPow = document
-  .querySelector("#btnPow")
-  .addEventListener("click", () => {
-    const value = document.querySelector("#value");
-    const pow = document.querySelector("#pow");
-    const output = document.querySelector(".output_2");
-    const result = calcPow(value.value, pow.value);
-    return (output.textContent = result);
+  for (let i = 0; i < item.action.length; ++i) {
+    const inp = document.getElementById("text-input").content.cloneNode(true);
+    const inpEl = inp.querySelector(".text-input");
+    inpEl.value = item.args[i];
+    dyn.appendChild(inp);
+  }
+
+  const submit = template.querySelector("[type=submit]");
+  const output = template.querySelector(".st-output");
+  const error = template.querySelector(".error");
+  submit.addEventListener("click", (e) => {
+    e.preventDefault();
+    error.innerHTML = "";
+    const inputs = [...dyn.querySelectorAll("input")];
+    const values = inputs.map((input, i) => {
+      switch (item.dataType[i]) {
+        case "number": {
+          if (!/^[+-]?[0-9]+$/.test(input.value)) {
+            error.innerHTML += `invalid integer "${input.value}" for argument ${i}<br>`;
+            return input.value;
+          }
+          return parseInt(input.value, 10);
+        }
+        case "float": {
+          if (!/^[+-]?([0-9]*[.])?[0-9]+$/.test(input.value)) {
+            error.innerHTML += `invalid float "${input.value}" for argument ${i}<br>`;
+            return input.value;
+          }
+          return parseFloat(input.value);
+        }
+        default:
+          return input.value;
+      }
+    });
+    if (error.textContent.length === 0) {
+      const result = item.action(...values);
+      output.textContent = String(result);
+    } else {
+      output.textContent = "";
+    }
   });
 
-const btnFormat = document
-  .querySelector("#btnFormat")
-  .addEventListener("click", () => {
-    const name = document.querySelector("#name");
-    const output = document.querySelector(".output_3");
-    const result = formatFirstLetterName(name.value);
-    return (output.textContent = result);
-  });
+  return template;
+}
 
-const btnSalary = document
-  .querySelector("#btnSalary")
-  .addEventListener("click", () => {
-    const money = document.querySelector("#money");
-    const output = document.querySelector(".output_4");
-    const result = salaryIncludTax(money.value);
-    return (output.textContent = result);
-  });
-
-const btnRandom = document
-  .querySelector("#btnRandom")
-  .addEventListener("click", () => {
-    const from = document.querySelector("#from");
-    const to = document.querySelector("#to");
-    const output = document.querySelector(".output_5");
-    const result = getRandomNumber(from.value, to.value);
-    console.log(result);
-    return (output.textContent = result);
-  });
-
-const btnReapet = document
-  .querySelector("#btnReapet")
-  .addEventListener("click", () => {
-    const ch = document.querySelector("#ch");
-    const word = document.querySelector("#word");
-    const output = document.querySelector(".output_6");
-    const result = countLetter(ch.value, word.value);
-    console.log(result);
-    return (output.textContent = result);
-  });
-
-const btnExchange = document
-  .querySelector("#btnExchange")
-  .addEventListener("click", () => {
-    const cash = document.querySelector("#cash");
-    const exch = document.querySelector("#exch");
-    const output = document.querySelector(".output_7");
-    const result = convertCurrency(cash.value, exch.value);
-    console.log(result);
-    return (output.textContent = result);
-  });
-
-const btnRandomPassword = document
-  .querySelector("#btnRandomPassword")
-  .addEventListener("click", () => {
-    const user = document.querySelector("#userNumber");
-    const output = document.querySelector(".output_8");
-    const result = convertCurrency(user.value);
-    console.log(result);
-    return (output.textContent = result);
-  });
-
-const codeContext = document.querySelector(".info-code");
-
-value = "Бісківіт був дуже ніжним";
+for (let item of list) {
+  wrapper.appendChild(createElement(item));
+}
 
 const btnShowModal = document.querySelectorAll(".show-modal");
 const modal = document.querySelector(".modal");
