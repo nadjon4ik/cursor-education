@@ -23,12 +23,18 @@ function salaryIncludTax(value) {
 }
 
 function getRandomNumber(n, m) {
-  return Math.floor(Math.random() * (m - n) + n) + 1;
+  return Math.floor(Math.random() * (m - n + 1) + n);
 }
 
 function countLetter(lett, word) {
-  const regExp = new RegExp(`${lett}`, 'gi');
-  return word.match(regExp).length;
+  const newWord = word.toLowerCase();
+  let count = 0;
+  for (let i = 0; i < newWord.length; i++) {
+    if (newWord[i] == lett) {
+      count++;
+    }
+  }
+  return count;
 }
 
 // конвертація валюти
