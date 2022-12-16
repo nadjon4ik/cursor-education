@@ -1,7 +1,7 @@
 // functions
 function getMaxDigit(maxValue) {
   const arr = String(maxValue)
-    .split("")
+    .split('')
     .map((item) => parseInt(item, 10));
   return Math.max(...arr);
 }
@@ -27,7 +27,7 @@ function getRandomNumber(n, m) {
 }
 
 function countLetter(lett, word) {
-  const regExp = new RegExp(`${lett}`, "gi");
+  const regExp = new RegExp(`${lett}`, 'gi');
   return word.match(regExp).length;
 }
 
@@ -40,7 +40,7 @@ function convertCurrency(value, exch) {
   }
 
   if (!checkCurrency(value)) {
-    return "Error";
+    return 'Error';
   }
 
   function checkCurrency(value) {
@@ -62,8 +62,8 @@ function convertCurrency(value, exch) {
 //генерація випадкового паролю
 // len - довжина паролю, що задається користувачем
 function getRandomPassword(len) {
-  let s = "";
-  if (len == "") {
+  let s = '';
+  if (len == '') {
     len = 8;
   }
   for (let i = 0; i < len; ++i) {
@@ -73,12 +73,12 @@ function getRandomPassword(len) {
 }
 
 function deleteLetters(lett, word) {
-  const regExp = new RegExp(`${lett}`, "ig");
-  return word.replace(regExp, "");
+  const regExp = new RegExp(`${lett}`, 'ig');
+  return word.replace(regExp, '');
 }
 
 function isPalyndrom(str) {
-  const newStr = str.replace(/\s/g, "").toLowerCase();
+  const newStr = str.replace(/\s/g, '').toLowerCase();
   for (let i = 0; i < Math.floor(newStr.length / 2); i++) {
     if (newStr[i] === newStr[newStr.length - 1 - i]) {
       continue;
@@ -90,7 +90,7 @@ function isPalyndrom(str) {
 }
 
 function deleteDuplicateLetter(str) {
-  let newStr = str.replace(/\s/g, "").toLowerCase();
+  let newStr = str.replace(/\s/g, '').toLowerCase();
   for (let i = 0; i < newStr.length; i++) {
     if (matchChar(newStr, newStr[i])) {
       newStr = remChar(newStr, newStr[i]);
@@ -100,7 +100,7 @@ function deleteDuplicateLetter(str) {
   return newStr;
 
   function remChar(str, ch) {
-    return str.replaceAll(ch, "");
+    return str.replaceAll(ch, '');
   }
 
   function matchChar(str, ch) {
@@ -116,140 +116,133 @@ function deleteDuplicateLetter(str) {
 //output
 const list = [
   {
-    content: "Функція №1 (Вивід найбільшої цифри з числа).",
-    funcName: "GetMaxDigit",
+    content: 'Функція №1 (Вивід найбільшої цифри з числа).',
+    funcName: 'GetMaxDigit',
     action: getMaxDigit,
-    args: [[]],
-    validation: ["number"],
+    args: [[1236]],
+    validation: ['number'],
   },
   {
-    content: "Функція №2 (Функція №2 (Піднесення числа до степеня).",
-    funcName: "CalcPow",
+    content: 'Функція №2 (Функція №2 (Піднесення числа до степеня).',
+    funcName: 'CalcPow',
     action: calcPow,
-    args: [[], []],
-    validation: ["number", "number"],
+    args: [[2], [2]],
+    validation: ['number', 'number'],
   },
   {
-    content: "Функція №3 (Форматування імені користувача).",
-    funcName: "FormatFirstLetterName",
+    content: 'Функція №3 (Форматування імені користувача).',
+    funcName: 'FormatFirstLetterName',
     action: formatFirstLetterName,
-    args: [[]],
-    validation: ["string"],
+    args: [['вЛАД']],
+    validation: ['string'],
   },
   {
-    content: "Функція №4(Обчислнння заробітньої плати).",
-    funcName: "SalaryIncludTax",
+    content: 'Функція №4(Обчислнння заробітньої плати).',
+    funcName: 'SalaryIncludTax',
     action: salaryIncludTax,
-    args: [[]],
-    validation: ["number"],
+    args: [[1000]],
+    validation: ['number'],
   },
   {
-    content: "Функція №5(Генерування випадкового цілого числа).",
-    funcName: "GetRandomNumber",
+    content: 'Функція №5(Генерування випадкового цілого числа).',
+    funcName: 'GetRandomNumber',
     action: getRandomNumber,
-    args: [[], []],
-    validation: ["number", "number"],
+    args: [[1], [10]],
+    validation: ['number', 'number'],
   },
   {
-    content: "Функція №6(Розрахунок повторів букви у слові).",
-    funcName: "CountLetter",
+    content: 'Функція №6(Розрахунок повторів букви у слові).',
+    funcName: 'CountLetter',
     action: countLetter,
-    args: [[], []],
-    validation: ["string", "string"],
+    args: [['а'], ['Асталавіста']],
+    validation: ['string', 'string'],
   },
   {
-    content: "Функція №7(Конвертація долару в гривні та навпаки).",
-    funcName: "ConvertCurrency",
+    content: 'Функція №7(Конвертація долару в гривні та навпаки).',
+    funcName: 'ConvertCurrency',
     action: convertCurrency,
-    args: [[], []],
-    validation: ["string", "string"],
+    args: [['100$'], [25]],
+    validation: ['string', 'number'],
   },
   {
     content:
-      "Функція №8(Генерування випадкового паролю із заданою довжиною користувачем)",
-    funcName: "GetRandomPassword",
+      'Функція №8(Генерування випадкового паролю із заданою довжиною користувачем)',
+    funcName: 'GetRandomPassword',
     action: getRandomPassword,
-    args: [[]],
-    validation: ["no-validation"],
+    args: [[8]],
+    validation: ['no-validation'],
   },
   {
-    content: "Функція №9(Видалення задачної букви із речення).",
-    funcName: "DeleteLetters",
+    content: 'Функція №9(Видалення задачної букви із речення).',
+    funcName: 'DeleteLetters',
     action: deleteLetters,
-    args: [[], []],
-    validation: ["string", "string"],
+    args: [['a'], ['blablablabla']],
+    validation: ['string', 'string'],
   },
   {
-    content: "Функція №10(Паліндром?).",
-    funcName: "IsPolyndrom",
+    content: 'Функція №10(Паліндром?).',
+    funcName: 'IsPolyndrom',
     action: isPalyndrom,
-    args: [[]],
-    validation: ["string"],
+    args: [['я несу гусеня']],
+    validation: ['string'],
   },
   {
-    content: "Функція №11(Видалення букв, що повторюються).",
-    funcName: "DeleteDuplicateLetter",
+    content: 'Функція №11(Видалення букв, що повторюються).',
+    funcName: 'DeleteDuplicateLetter',
     action: deleteDuplicateLetter,
-    args: [[]],
-    validation: ["string"],
+    args: [['Бісківіт був дуже ніжним']],
+    validation: ['string'],
   },
 ];
-const wrapper = document.querySelector(".wrapper");
+const wrapper = document.querySelector('.wrapper');
 
 function createElement(item) {
   const template = document
-    .getElementById("item-template")
+    .getElementById('item-template')
     .content.cloneNode(true);
-  const title = template.querySelector(".content");
+  const title = template.querySelector('.content');
   title.textContent = item.content;
-  const funcName = template.querySelector(".func_name");
+  const funcName = template.querySelector('.func_name');
   funcName.textContent = item.funcName;
-  const dyn = template.querySelector(".dynamic");
+  const dyn = template.querySelector('.dynamic');
 
-  const icon = template.querySelector(".st-icon");
+  const icon = template.querySelector('.st-icon');
   icon.dataset.code = encodeURIComponent(item.action.toString());
-  icon.addEventListener("click", function () {
+  icon.addEventListener('click', function () {
     const code = decodeURIComponent(this.dataset.code);
-    const codeInfo = document.querySelector(".info-code");
+    const codeInfo = document.querySelector('.info-code');
     codeInfo.textContent = code;
   });
 
   for (let i = 0; i < item.action.length; ++i) {
-    const inp = document.getElementById("text-input").content.cloneNode(true);
-    const inpEl = inp.querySelector(".text-input");
+    const inp = document.getElementById('text-input').content.cloneNode(true);
+    const inpEl = inp.querySelector('.text-input');
     inpEl.value = item.args[i];
     dyn.appendChild(inp);
   }
 
-  const submit = template.querySelector("[type=submit]");
-  const output = template.querySelector(".st-output");
-  const error = template.querySelector(".error");
-  submit.addEventListener("click", (e) => {
+  const submit = template.querySelector('[type=submit]');
+  const output = template.querySelector('.st-output');
+  const error = template.querySelector('.error');
+  submit.addEventListener('click', (e) => {
     e.preventDefault();
-    error.innerHTML = "";
-    const inputs = [...dyn.querySelectorAll("input")];
+    error.innerHTML = '';
+    const inputs = [...dyn.querySelectorAll('input')];
     const values = inputs.map((input, i) => {
       switch (item.validation[i]) {
-        case "number": {
+        case 'number': {
           if (!/^[+-]?[0-9]+$/.test(input.value)) {
             error.innerHTML += `invalid integer "${input.value}" for argument ${i}<br>`;
             return input.value;
           }
           return parseInt(input.value, 10);
         }
-        case "float": {
+        case 'float': {
           if (!/^[+-]?([0-9]*[.])?[0-9]+$/.test(input.value)) {
             error.innerHTML += `invalid float "${input.value}" for argument ${i}<br>`;
             return input.value;
           }
           return parseFloat(input.value);
-        }
-        case "string": {
-          if (!/^([a-z])+$/gi.test(input.value)) {
-            error.innerHTML += `invalid string "${input.value}" for argument ${i}<br>`;
-            return input.value;
-          }
-          return input.value;
         }
         default:
           return input.value;
@@ -259,7 +252,7 @@ function createElement(item) {
       const result = item.action(...values);
       output.textContent = String(result);
     } else {
-      output.textContent = "";
+      output.textContent = '';
     }
   });
 
@@ -269,31 +262,31 @@ function createElement(item) {
 for (let item of list) {
   wrapper.appendChild(createElement(item));
 }
-const btnShowModal = document.querySelectorAll(".show-modal");
-const modal = document.querySelector(".modal");
-const overlay = document.querySelector(".overlay");
-const btnCloseModal = document.querySelector(".close-modal");
+const btnShowModal = document.querySelectorAll('.show-modal');
+const modal = document.querySelector('.modal');
+const overlay = document.querySelector('.overlay');
+const btnCloseModal = document.querySelector('.close-modal');
 
 const closeModal = function () {
-  modal.classList.add("hidden");
-  overlay.classList.add("hidden");
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
 };
 
 const openModal = function () {
   // codeContext.textContent = this.dataset.code;
-  modal.classList.remove("hidden");
-  overlay.classList.remove("hidden");
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
 };
 
 for (let i = 0; i < btnShowModal.length; i++) {
-  btnShowModal[i].addEventListener("click", openModal);
+  btnShowModal[i].addEventListener('click', openModal);
 }
 
-btnCloseModal.addEventListener("click", closeModal);
-overlay.addEventListener("click", closeModal);
+btnCloseModal.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal);
 
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal();
   }
 });
