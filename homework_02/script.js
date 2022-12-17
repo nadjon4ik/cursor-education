@@ -8,7 +8,7 @@ function main() {
   }
 
   let m = showInputPrompt(
-    `M, де M - число, що вказує на кінець діапазону (введіть більше за ${n})`
+    `M, де M - число, що вказує на кінець діапазону.`
   );
   if (m == null) {
     alert('Обчислити додавання неможливо!');
@@ -17,7 +17,7 @@ function main() {
 
   const skipEven = confirm('Пропускати парні числа?');
   const sum = sumRange(n, m, skipEven);
-  alert(`Результатом складання чисел від ${n} до ${m} є ${sum}`);
+  alert(`Результатом складання чисел від ${Math.min(m,n)} до ${Math.max(m,n)} є ${sum}`);
 }
 
 function showInputPrompt(name) {
@@ -46,7 +46,7 @@ function repeatInput(num, name) {
 
 function sumRange(from, to, skipEven) {
   let sum = 0;
-  for (let i = from; i <= to; i++) {
+  for (let i = Math.min(from,to); i <= Math.max(from,to); i++) {
     if (!skipEven || i % 2 !== 0) {
       sum += i;
     }
