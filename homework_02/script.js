@@ -1,23 +1,27 @@
 main();
 
-function main() {
-  let n = showInputPrompt('N, де N - число,що задає початок діапазону');
+async function main() {
+  try {
+    let n = await setInputValues('N, де n - число,що задає початок діапазону');
+    let m = await setInputValues(`M, де m - число, що вказує на кінець діапазону. Якщо m<n, то результат додавання буде в межах m-n!`);
+    const skipEven = confirm('Пропускати парні числа?');
+    const sum = sumRange(n, m, skipEven);
+    alert(`Результатом складання чисел від ${Math.min(m, n)} до ${Math.max(m, n)} є ${sum}`);
+  } catch (e) {
+    if (e) {
+      console.error(e);
+    }
+  }
+}
+
+
+function setInputValues(message) {
+  let n = showInputPrompt(message);
   if (n == null) {
     alert('Обчислити додавання неможливо!');
-    return;
+    return Promise.reject();
   }
-
-  let m = showInputPrompt(
-    `M, де M - число, що вказує на кінець діапазону.`
-  );
-  if (m == null) {
-    alert('Обчислити додавання неможливо!');
-    return;
-  }
-
-  const skipEven = confirm('Пропускати парні числа?');
-  const sum = sumRange(n, m, skipEven);
-  alert(`Результатом складання чисел від ${Math.min(m,n)} до ${Math.max(m,n)} є ${sum}`);
+  return n;
 }
 
 function showInputPrompt(name) {
@@ -46,7 +50,7 @@ function repeatInput(num, name) {
 
 function sumRange(from, to, skipEven) {
   let sum = 0;
-  for (let i = Math.min(from,to); i <= Math.max(from,to); i++) {
+  for (let i = Math.min(from, to); i <= Math.max(from, to); i++) {
     if (!skipEven || i % 2 !== 0) {
       sum += i;
     }
