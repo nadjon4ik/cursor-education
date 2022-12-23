@@ -1,12 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <script src="main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Arrays</title>
+  </head>
+  <body>
+    <div class="modal hidden">
+      <button class="close-modal">&times;</button>
+      <p class="info-code"></p>
+    </div>
+    <div id="wrapper">
+      <form>
+        <fieldset>
+          <legend>
+            <span>
+              <span
+                class="material-symbols-outlined st-icon show-modal"
+                title="Review code"
+                >quick_reference</span
+              >
+              <span class="legend-text"> Заповніть форму </span>
+            </span>
+          </legend>
+          <div class="input">
+            <span
+              class="material-symbols-outlined st-info show-modal md-60"
+              title="Show info"
+            >
+              info
+            </span>
+            <label for="students">Студенти</label>
+            <input
+              type="text"
+              class="label"
+              id="students"
+              placeholder="Іванов, Іванова"
+              autocomplete="off"
+              autofocus="on"
+              required
+            />
+          </div>
+          <div id="themes" class="input">
+            <label for="tasks"
+              >Введіть не менше <span class="numb-them"></span> тем</label
+            >
+            <input
+              type="text"
+              class="label"
+              id="tasks"
+              placeholder="Теорія відносності, Закон тяжіння"
+              autocomplete="off"
+              autofocus="on"
+              required
+            />
+            <input type="submit" id="setThemes" value="Задати" />
+            <input
+              type="reset"
+              class="material-symbols-outlined st-refresh"
+              value="refresh"
+            />
+          </div>
+        </fieldset>
+        <fieldset class="marks hidden">
+          <legend>
+            <span>Виставте оцінки</span>
+          </legend>
+          <div class="wrap"></div>
+          <input type="submit" class="btn-submit" value="Вивести" />
+        </fieldset>
+      </form>
+      <table class="styled-table hidden">
+        <thead>
+          <tr>
+            <td>№</td>
+            <td>Студент</td>
+            <td>Тема</td>
+            <td>Оцінка</td>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <template id="template-result">
+      <div class="input result">
+        <span class="st-output"
+          ><span class="names"></span>, "<span class="theme"></span>"
+        </span>
+        -
+        <input type="text" class="text-input input_value" placeholder="1" />
+      </div>
+    </template>
+    <template id="results">
+      <tr>
+        <td class="count"></td>
+        <td class="student"></td>
+        <td class="thema"></td>
+        <td class="mark"></td>
+      </tr>
+    </template>
+    <div class="overlay hidden"></div>
+    <script src="main.js"></script>
+  </body>
 </html>

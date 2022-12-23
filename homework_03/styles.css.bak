@@ -61,6 +61,12 @@ div {
   }
 }
 
+@media all and (max-width:30em) {
+  a.button2 {
+    display: block;
+    margin: 0.4em auto;
+  }
+}
 
 .error {
   display: block;
