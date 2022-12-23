@@ -185,7 +185,7 @@ function createInputElement(arr, thema) {
     .addEventListener("keypress", preventKeys(/[^1-5]/i));
   const names = template.querySelector(".names");
   const theme = template.querySelector(".theme");
-  names.textContent = arr.join(" - ");
+  names.textContent = arr.join(" і ");
   theme.textContent = thema;
   return template;
 }
