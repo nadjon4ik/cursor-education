@@ -171,7 +171,6 @@ sudentsField.addEventListener("input", () => {
 refresh.addEventListener("click", () => {
   hide([fieldset, table], "hidden");
   btnSetThemes.removeAttribute("disabled", "");
-
   wrapper.innerHTML = "";
 });
 
