@@ -9,7 +9,7 @@ function setDataStructure(names, themes, mark) {
       `"${themes[i]}"`,
       mark[i],
       arr[i].length < 2
-        ? [[arr[i][0], mark[i]]]
+        ? [[arr[i][0], setRandomRangeMark(mark[i])]]
         : [
             [arr[i][0], setRandomRangeMark(mark[i])],
             [arr[i][1], setRandomRangeMark(mark[i])],
