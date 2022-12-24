@@ -1,207 +1,161 @@
-// functions
-function getMaxDigit(maxValue) {
-  const arr = String(maxValue)
-    .split('')
-    .map((item) => parseInt(item, 10));
-  return Math.max(...arr);
+function getRandomArray(len, min, max) {
+  return new Array(len)
+    .fill(0)
+    .map((el) => Math.floor(Math.random() * (max - min) + min));
 }
 
-function calcPow(num, pow) {
-  let result = 1;
-  for (let i = 0; i < pow; i++) {
-    result *= num;
-  }
-  return result;
-}
-
-function formatFirstLetterName(str) {
-  return str[0].toUpperCase() + str.slice(1).toLowerCase();
-}
-
-function salaryIncludTax(value) {
-  return Math.floor(value - value * (19.5 / 100));
-}
-
-function getRandomNumber(n, m) {
-  return Math.floor(Math.random() * (m - n + 1) + n);
-}
-
-function countLetter(lett, word) {
-  lett = lett.toLowerCase();
-  word = word.toLowerCase();
+function getModa(arr) {
+  const integer = getIntegerFromArray(arr);
+  const mode = {};
+  let max = 0;
   let count = 0;
-  for (let i = 0; i < word.length; i++) {
-    if (word[i] == lett) {
-      count++;
-    }
-  }
-  return count;
-}
 
-// конвертація валюти
-function convertCurrency(value, exch) {
-  if (isUAH(value)) {
-    return `${(parseInt(value, 10) / exch).toFixed(2)}$`;
-  } else if (isUSD(value)) {
-    return `${(parseInt(value, 10) * exch).toFixed(2)}грн.`;
-  }
-
-  if (!checkCurrency(value)) {
-    return 'Error';
-  }
-
-  function checkCurrency(value) {
-    if (!isUAH(value) && !isUSD(value)) {
-      return false;
-    }
-    return true;
-  }
-
-  function isUAH(val) {
-    return /uah/gi.test(val);
-  }
-
-  function isUSD(val) {
-    return /\$/.test(val);
-  }
-}
-
-//генерація випадкового паролю
-// len - довжина паролю, що задається користувачем
-function getRandomPassword(len) {
-  let s = '';
-  if (len == '') {
-    len = 8;
-  }
-  for (let i = 0; i < len; ++i) {
-    s += Math.floor(Math.random() * 10);
-  }
-  return s;
-}
-
-function deleteLetters(lett, word) {
-  const regExp = new RegExp(`${lett}`, 'ig');
-  return word.replace(regExp, '');
-}
-
-function isPalyndrom(str) {
-  const newStr = str.replace(/\s/g, '').toLowerCase();
-  for (let i = 0; i < Math.floor(newStr.length / 2); i++) {
-    if (newStr[i] === newStr[newStr.length - 1 - i]) {
-      continue;
+  for (let item of integer) {
+    if (mode.hasOwnProperty(item)) {
+      ++mode[item];
     } else {
-      return false;
+      mode[item] = 1;
+    }
+
+    if (mode[item] > count) {
+      max = item;
+      count = mode[item];
     }
   }
-  return true;
+  return max;
 }
 
-function deleteDuplicateLetter(str) {
-  let newStr = str.replace(/\s/g, '').toLowerCase();
-  for (let i = 0; i < newStr.length; i++) {
-    if (matchChar(newStr, newStr[i])) {
-      newStr = remChar(newStr, newStr[i]);
-      --i;
-    }
-  }
-  return newStr;
-
-  function remChar(str, ch) {
-    return str.replaceAll(ch, '');
-  }
-
-  function matchChar(str, ch) {
-    let count = 0;
-    for (let i = 0; i < str.length; i++) {
-      str[i] === ch ? ++count : count;
-    }
-    return count > 1 ? true : false;
-  }
+function getAverage(arr) {
+  const integer = getIntegerFromArray(arr);
+  return (
+    integer.reduce((acc, item) => {
+      return acc + item;
+    }, 0) / integer.length
+  );
 }
 
-//end
-//output
+function getMedian(arr) {
+  const integer = getIntegerFromArray(arr);
+  const sorted = integer.sort((a, b) => a - b);
+  if (sorted.length % 2 != 0) {
+    return sorted[Math.floor(sorted.length / 2)];
+  }
+  return (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
+}
+
+function getIntegerFromArray(arr = []) {
+  return arr.filter((el) => Number.isInteger(el));
+}
+
+function filterEvenNumbers(arr) {
+  const integer = getIntegerFromArray(arr);
+  return integer.filter((el) => el % 2 !== 0);
+}
+
+function countPositiveNumber(arr) {
+  return arr.filter((el) => el > 0).length;
+}
+
+function getDividedByFive(arr) {
+  return arr.filter((el) => el % 5 == 0);
+}
+
+function replaceBadWords(str) {
+  const strArr = str.split(' ');
+  const badWord = /(shit|fuck)/gi;
+  const res = strArr.map((item) => {
+    if (badWord.test(item)) {
+      item = item.replace(badWord, '****');
+    }
+    return item;
+  });
+  return res.join(' ');
+}
+
+function dividedByThree(word) {
+  const newWord = word.trim().toLowerCase();
+  const res = [];
+  for (let i = 0; i < newWord.length; i += 3) {
+    res.push(newWord.substring(i, i + 3));
+  }
+  return res;
+}
+// //output
 const list = [
   {
-    content: 'Функція №1 (Вивід найбільшої цифри з числа).',
-    funcName: 'GetMaxDigit',
-    action: getMaxDigit,
-    args: [[1236]],
+    content: 'Функція №1 (Генерування масиву випадкових цілих чисел).',
+    funcName: 'GetRandomArray',
+    action: getRandomArray,
+    validation: ['integer', 'integer', 'integer'],
+  },
+  {
+    content: 'Функція №2 (Функція №2 (Визначення моди масиву).',
+    funcName: 'GetModa',
+    action: getModa,
     validation: ['number'],
   },
   {
-    content: 'Функція №2 (Функція №2 (Піднесення числа до степеня).',
-    funcName: 'CalcPow',
-    action: calcPow,
-    args: [[2], [2]],
-    validation: ['number', 'number'],
-  },
-  {
-    content: 'Функція №3 (Форматування імені користувача).',
-    funcName: 'FormatFirstLetterName',
-    action: formatFirstLetterName,
-    args: [['вЛАД']],
-    validation: ['string'],
-  },
-  {
-    content: 'Функція №4(Обчислнння заробітньої плати).',
-    funcName: 'SalaryIncludTax',
-    action: salaryIncludTax,
-    args: [[1000]],
+    content: 'Функція №3 (Середнє арифметичне всіх чисел).',
+    funcName: 'GetAverage',
+    action: getAverage,
     validation: ['number'],
   },
   {
-    content: 'Функція №5(Генерування випадкового цілого числа).',
-    funcName: 'GetRandomNumber',
-    action: getRandomNumber,
-    args: [[1], [10]],
-    validation: ['number', 'number'],
+    content: 'Функція №4(Обчислнння медіани всіх чисел).',
+    funcName: 'GetMedian',
+    action: getMedian,
+    validation: ['number'],
   },
   {
-    content: 'Функція №6(Розрахунок повторів букви у слові).',
-    funcName: 'CountLetter',
-    action: countLetter,
-    args: [['а'], ['Асталавіста']],
-    validation: ['string', 'string'],
+    content: 'Функція №5(Фільтрація парних чисел).',
+    funcName: 'FilterEvenNumbers',
+    action: filterEvenNumbers,
+    validation: ['number'],
   },
   {
-    content: 'Функція №7(Конвертація долару в гривні та навпаки).',
-    funcName: 'ConvertCurrency',
-    action: convertCurrency,
-    args: [['100$'], [25]],
-    validation: ['string', 'number'],
+    content: 'Функція №6(Виводить числа, що діляться на 5 ).',
+    funcName: 'GetDividedByFive',
+    action: getDividedByFive,
+    validation: ['number'],
   },
   {
-    content:
-      'Функція №8(Генерування випадкового паролю із заданою довжиною користувачем)',
-    funcName: 'GetRandomPassword',
-    action: getRandomPassword,
-    args: [[8]],
-    validation: ['no-validation'],
+    content: 'Функція №7(Виводить кількість позитивних чисел).',
+    funcName: 'СountPositiveNumber',
+    action: countPositiveNumber,
+    validation: ['number'],
   },
   {
-    content: 'Функція №9(Видалення задачної букви із речення).',
-    funcName: 'DeleteLetters',
-    action: deleteLetters,
-    args: [['a'], ['blablablabla']],
-    validation: ['string', 'string'],
-  },
-  {
-    content: 'Функція №10(Паліндром?).',
-    funcName: 'IsPalyndrom',
-    action: isPalyndrom,
-    args: [['я несу гусеня']],
+    content: 'Функція №8(Цензура)',
+    funcName: 'ReplaceBadWords',
+    action: replaceBadWords,
     validation: ['string'],
   },
   {
-    content: 'Функція №11(Видалення букв, що повторюються).',
-    funcName: 'DeleteDuplicateLetter',
-    action: deleteDuplicateLetter,
-    args: [['Бісківіт був дуже ніжним']],
+    content: 'Функція №9(Розбиття слова на 3-ох значні склади).',
+    funcName: 'DividedByThree',
+    action: dividedByThree,
     validation: ['string'],
   },
 ];
 const wrapper = document.querySelector('.wrapper');
+
+function showPopup(content, x, y) {
+  const exist = document.querySelector('.popup');
+  if (!exist) {
+    const d = document.createElement('div');
+    d.classList.add('popup');
+    d.innerHTML = content;
+    if (typeof x !== 'undefined' && typeof y !== 'undefined') {
+      d.style.display = 'absolute';
+      d.style.left = x + 'px';
+      d.style.top = y + 'px';
+    }
+    document.body.appendChild(d);
+    setTimeout(() => {
+      document.body.removeChild(d);
+    }, 1000);
+  }
+}
 
 function createElement(item) {
   const template = document
@@ -225,35 +179,50 @@ function createElement(item) {
 
   for (let i = 0; i < item.action.length; ++i) {
     const inp = document.getElementById('text-input').content.cloneNode(true);
-    const inpEl = inp.querySelector('.text-input');
-    inpEl.value = item.args[i];
     dyn.appendChild(inp);
   }
 
   const submit = template.querySelector('[type=submit]');
   const output = template.querySelector('.st-output');
-  const error = template.querySelector('.error');
 
   submit.addEventListener('click', (e) => {
     e.preventDefault();
-    error.innerHTML = '';
     const inputs = [...dyn.querySelectorAll('input')];
 
     const values = inputs.map((input, i) => {
       switch (item.validation[i]) {
-        case 'number': {
-          if (!/^[+-]?[0-9]+$/.test(input.value)) {
-            error.innerHTML += `invalid integer "${input.value}" for argument ${i}<br>`;
+        case 'integer': {
+          if (!/^[0-9]|\,$/.test(input.value)) {
+            showPopup(
+              `invalid integer "${input.value}" for argument ${i}`,
+              input.offsetLeft,
+              input.offsetTop + input.offsetHeight
+            );
             return input.value;
           }
           return parseInt(input.value, 10);
         }
-        case 'float': {
-          if (!/^[+-]?([0-9]*[.])?[0-9]+$/.test(input.value)) {
-            error.innerHTML += `invalid float "${input.value}" for argument ${i}<br>`;
+        case 'string': {
+          if (/^[a-z | A-Z]$/.test(input.value)) {
+            showPopup(
+              `invalid string "${input.value}" for argument ${i}`,
+              input.offsetLeft,
+              input.offsetTop + input.offsetHeight
+            );
             return input.value;
           }
-          return parseFloat(input.value);
+          return input.value;
+        }
+        case 'number': {
+          if (!/^[+-]|[0-9]|\,$/.test(input.value)) {
+            showPopup(
+              `invalid integer "${input.value}" for argument ${i}`,
+              input.offsetLeft,
+              input.offsetTop + input.offsetHeight
+            );
+            return input.value;
+          }
+          return input.value.split(',').map((el) => Number(el));
         }
         default:
           return input.value;
@@ -262,7 +231,7 @@ function createElement(item) {
 
     if (error.textContent.length === 0) {
       const result = item.action(...values);
-      output.textContent = String(result);
+      output.textContent = `[${String(result)}]`;
     } else {
       output.textContent = '';
     }
