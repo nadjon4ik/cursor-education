@@ -229,12 +229,8 @@ function createElement(item) {
       }
     });
 
-    if (error.textContent.length === 0) {
-      const result = item.action(...values);
-      output.textContent = `[${String(result)}]`;
-    } else {
-      output.textContent = '';
-    }
+    const result = item.action(...values);
+    output.textContent = `[${String(result)}]`;
   });
 
   return template;
