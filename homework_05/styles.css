@@ -155,19 +155,18 @@ span.st-icon:hover {
 
 .popup {
   position: absolute;
-  width: 250px;
-  left: 0;
-  top: 0;
+  width: 165px;
   height: 50px;
   color: #D8000C;
   background-color: #FFBABA;
   background-image: url(img/delete_icon-icons.com_74434.png);
   border: 1px solid;
   margin: 10px 0px;
-  padding: 14px 5px 20px 52px;
+  padding: 0px 0px 0px 48px;
   background-repeat: no-repeat;
   background-position: 10px center;
   border-radius: 45px;
+  line-height: 3;
 }
 
 #from, #to {

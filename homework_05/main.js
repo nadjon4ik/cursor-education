@@ -31,7 +31,7 @@ function getAverage(arr) {
     integer.reduce((acc, item) => {
       return acc + item;
     }, 0) / integer.length
-  );
+  ).toFixed(1);
 }
 
 function getMedian(arr) {
@@ -87,54 +87,72 @@ const list = [
     funcName: 'GetRandomArray',
     action: getRandomArray,
     validation: ['integer', 'integer', 'integer'],
+    placeholder: '1,2,3,6',
+    'type of output': '[]',
   },
   {
     content: 'Функція №2 (Функція №2 (Визначення моди масиву).',
     funcName: 'GetModa',
     action: getModa,
     validation: ['number'],
+    placeholder: '1,2,3,6',
+    'type of output': 'number',
   },
   {
     content: 'Функція №3 (Середнє арифметичне всіх чисел).',
     funcName: 'GetAverage',
     action: getAverage,
     validation: ['number'],
+    placeholder: '1,2,3,6',
+    'type of output': 'number',
   },
   {
     content: 'Функція №4(Обчислнння медіани всіх чисел).',
     funcName: 'GetMedian',
     action: getMedian,
     validation: ['number'],
+    placeholder: '1,2,3,6',
+    'type of output': 'number',
   },
   {
     content: 'Функція №5(Фільтрація парних чисел).',
     funcName: 'FilterEvenNumbers',
     action: filterEvenNumbers,
     validation: ['number'],
+    placeholder: '1,2,3,6',
+    'type of output': '[]',
   },
   {
     content: 'Функція №6(Виводить числа, що діляться на 5 ).',
     funcName: 'GetDividedByFive',
     action: getDividedByFive,
     validation: ['number'],
+    placeholder: '1,2,3,6',
+    'type of output': '[]',
   },
   {
     content: 'Функція №7(Виводить кількість позитивних чисел).',
     funcName: 'СountPositiveNumber',
     action: countPositiveNumber,
     validation: ['number'],
+    placeholder: '1,2,3,6',
+    'type of output': 'number',
   },
   {
     content: 'Функція №8(Цензура)',
     funcName: 'ReplaceBadWords',
     action: replaceBadWords,
     validation: ['string'],
+    placeholder: 'Are you fucking kidding?',
+    'type of output': 'string',
   },
   {
     content: 'Функція №9(Розбиття слова на 3-ох значні склади).',
     funcName: 'DividedByThree',
     action: dividedByThree,
+    placeholder: 'word',
     validation: ['string'],
+    'type of output': '[]',
   },
 ];
 const wrapper = document.querySelector('.wrapper');
@@ -171,6 +189,7 @@ function createElement(item) {
 
   const icon = template.querySelector('.st-icon');
   icon.dataset.code = encodeURIComponent(item.action.toString());
+
   icon.addEventListener('click', function () {
     const code = decodeURIComponent(this.dataset.code);
     const codeInfo = document.querySelector('.info-code');
@@ -178,8 +197,12 @@ function createElement(item) {
   });
 
   for (let i = 0; i < item.action.length; ++i) {
-    const inp = document.getElementById('text-input').content.cloneNode(true);
-    dyn.appendChild(inp);
+    const template = document
+      .getElementById('text-input')
+      .content.cloneNode(true);
+    const inp = template.querySelector('input');
+    inp.setAttribute('placeholder', `${item.placeholder}`);
+    dyn.appendChild(template);
   }
 
   const submit = template.querySelector('[type=submit]');
@@ -194,29 +217,27 @@ function createElement(item) {
         case 'integer': {
           if (!/^[0-9]|\,$/.test(input.value)) {
             showPopup(
-              `invalid integer "${input.value}" for argument ${i}`,
+              `Invalid integer`,
               input.offsetLeft,
               input.offsetTop + input.offsetHeight
             );
-            return input.value;
           }
           return parseInt(input.value, 10);
         }
         case 'string': {
-          if (/^[a-z | A-Z]$/.test(input.value)) {
+          if (/[0-9]$/.test(input.value)) {
             showPopup(
-              `invalid string "${input.value}" for argument ${i}`,
+              `Invalid string`,
               input.offsetLeft,
               input.offsetTop + input.offsetHeight
             );
-            return input.value;
           }
           return input.value;
         }
         case 'number': {
           if (!/^[+-]|[0-9]|\,$/.test(input.value)) {
             showPopup(
-              `invalid integer "${input.value}" for argument ${i}`,
+              `invalid number`,
               input.offsetLeft,
               input.offsetTop + input.offsetHeight
             );
@@ -228,9 +249,11 @@ function createElement(item) {
           return input.value;
       }
     });
-
     const result = item.action(...values);
-    output.textContent = `[${String(result)}]`;
+
+    item['type of output'] == 'number' || item['type of output'] == 'string'
+      ? (output.textContent = `${String(result)}`)
+      : (output.textContent = `[${String(result)}]`);
   });
 
   return template;
