@@ -87,7 +87,7 @@ const list = [
     funcName: 'GetRandomArray',
     action: getRandomArray,
     validation: ['integer', 'integer', 'integer'],
-    placeholder: '1,2,3,6',
+    placeholder: ['len', 'min', 'max'],
     'type of output': '[]',
   },
   {
@@ -95,7 +95,7 @@ const list = [
     funcName: 'GetModa',
     action: getModa,
     validation: ['number'],
-    placeholder: '1,2,3,6',
+    placeholder: ['1,2,3,6'],
     'type of output': 'number',
   },
   {
@@ -103,7 +103,7 @@ const list = [
     funcName: 'GetAverage',
     action: getAverage,
     validation: ['number'],
-    placeholder: '1,2,3,6',
+    placeholder: ['1,2,3,6'],
     'type of output': 'number',
   },
   {
@@ -111,7 +111,7 @@ const list = [
     funcName: 'GetMedian',
     action: getMedian,
     validation: ['number'],
-    placeholder: '1,2,3,6',
+    placeholder: ['1,2,3,6'],
     'type of output': 'number',
   },
   {
@@ -119,7 +119,7 @@ const list = [
     funcName: 'FilterEvenNumbers',
     action: filterEvenNumbers,
     validation: ['number'],
-    placeholder: '1,2,3,6',
+    placeholder: ['1,2,3,6'],
     'type of output': '[]',
   },
   {
@@ -127,7 +127,7 @@ const list = [
     funcName: 'GetDividedByFive',
     action: getDividedByFive,
     validation: ['number'],
-    placeholder: '1,2,3,6',
+    placeholder: ['1,2,3,6'],
     'type of output': '[]',
   },
   {
@@ -135,7 +135,7 @@ const list = [
     funcName: 'СountPositiveNumber',
     action: countPositiveNumber,
     validation: ['number'],
-    placeholder: '1,2,3,6',
+    placeholder: ['1,2,3,6'],
     'type of output': 'number',
   },
   {
@@ -143,14 +143,14 @@ const list = [
     funcName: 'ReplaceBadWords',
     action: replaceBadWords,
     validation: ['string'],
-    placeholder: 'Are you fucking kidding?',
+    placeholder: ['Are you fucking kidding?'],
     'type of output': 'string',
   },
   {
     content: 'Функція №9(Розбиття слова на 3-ох значні склади).',
     funcName: 'DividedByThree',
     action: dividedByThree,
-    placeholder: 'word',
+    placeholder: ['word'],
     validation: ['string'],
     'type of output': '[]',
   },
@@ -201,7 +201,7 @@ function createElement(item) {
       .getElementById('text-input')
       .content.cloneNode(true);
     const inp = template.querySelector('input');
-    inp.setAttribute('placeholder', `${item.placeholder}`);
+    inp.setAttribute('placeholder', `${item.placeholder[i]}`);
     dyn.appendChild(template);
   }
 
