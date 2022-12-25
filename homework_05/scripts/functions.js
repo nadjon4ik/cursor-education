@@ -1,4 +1,15 @@
-export function getRandomArray(len, min, max) {
+export {
+  getRandomArray,
+  getModa,
+  getAverage,
+  getMedian,
+  filterEvenNumbers,
+  countPositiveNumber,
+  getDividedByFive,
+  replaceBadWords,
+  dividedByThree,
+};
+function getRandomArray(len, min, max) {
   if (isNaN(len)) {
     return;
   }
@@ -7,7 +18,7 @@ export function getRandomArray(len, min, max) {
     .map((el) => Math.floor(Math.random() * (max - min) + min));
 }
 
-export function getModa(arr) {
+function getModa(arr) {
   const integer = getIntegerFromArray(arr);
   const mode = {};
   let max = 0;
@@ -28,7 +39,7 @@ export function getModa(arr) {
   return max;
 }
 
-export function getAverage(arr) {
+function getAverage(arr) {
   const integer = getIntegerFromArray(arr);
   return (
     integer.reduce((acc, item) => {
@@ -37,7 +48,7 @@ export function getAverage(arr) {
   ).toFixed(1);
 }
 
-export function getMedian(arr) {
+function getMedian(arr) {
   const integer = getIntegerFromArray(arr);
   const sorted = integer.sort((a, b) => a - b);
   if (sorted.length % 2 != 0) {
@@ -46,24 +57,24 @@ export function getMedian(arr) {
   return (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
 }
 
-export function getIntegerFromArray(arr = []) {
+function getIntegerFromArray(arr = []) {
   return arr.filter((el) => Number.isInteger(el));
 }
 
-export function filterEvenNumbers(arr) {
+function filterEvenNumbers(arr) {
   const integer = getIntegerFromArray(arr);
   return integer.filter((el) => el % 2 !== 0);
 }
 
-export function countPositiveNumber(arr) {
+function countPositiveNumber(arr) {
   return arr.filter((el) => el > 0).length;
 }
 
-export function getDividedByFive(arr) {
+function getDividedByFive(arr) {
   return arr.filter((el) => el % 5 == 0);
 }
 
-export function replaceBadWords(str) {
+function replaceBadWords(str) {
   const strArr = str.split(' ');
   const badWord = /(shit|fuck)/gi;
   const res = strArr.map((item) => {
@@ -75,7 +86,7 @@ export function replaceBadWords(str) {
   return res.join(' ');
 }
 
-export function dividedByThree(word) {
+function dividedByThree(word) {
   const newWord = word.trim().toLowerCase();
   const res = [];
   for (let i = 0; i < newWord.length; i += 3) {
