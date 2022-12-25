@@ -264,7 +264,7 @@ function createElement(item) {
     const values = inputs.map((input, i) => {
       switch (item.validation[i]) {
         case 'number': {
-          if (!/^[+]?[0-9]+$/.test(input.value)) {
+          if (!/^[0-9]+$/.test(input.value)) {
             showPopup(
               `Invalid number`,
               input.offsetLeft,
