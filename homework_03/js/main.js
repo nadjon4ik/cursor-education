@@ -1,130 +1,17 @@
 // functions
-function getMaxDigit(maxValue) {
-  const arr = String(maxValue)
-    .split('')
-    .map((item) => parseInt(item, 10));
-  return Math.max(...arr);
-}
-
-function isNaNArr(arr) {
-  return arr.some((elem) => isNaN(elem));
-}
-
-function calcPow(num, pow) {
-  if (pow < 0) {
-    return '';
-  }
-  let result = 1;
-  for (let i = 0; i < pow; i++) {
-    result *= num;
-  }
-  return result;
-}
-
-function formatFirstLetterName(str) {
-  if (str == '') return;
-  return str[0].toUpperCase() + str.slice(1).toLowerCase();
-}
-
-function salaryIncludTax(value) {
-  return Math.floor(value - value * (19.5 / 100));
-}
-
-function getRandomNumber(n, m) {
-  return Math.floor(Math.random() * (m - n + 1) + n);
-}
-
-function countLetter(lett, word) {
-  lett = lett.toLowerCase();
-  word = word.toLowerCase();
-  let count = 0;
-  for (let i = 0; i < word.length; i++) {
-    if (word[i] == lett) {
-      count++;
-    }
-  }
-  return count;
-}
-
-// конвертація валюти
-function convertCurrency(value, exch) {
-  if (isUAH(value)) {
-    return `${(parseInt(value, 10) / exch).toFixed(2)}$`;
-  } else if (isUSD(value)) {
-    return `${(parseInt(value, 10) * exch).toFixed(2)}грн.`;
-  }
-
-  if (!checkCurrency(value)) {
-    return 'Enter correct valute!';
-  }
-
-  function checkCurrency(value) {
-    if (!isUAH(value) && !isUSD(value)) {
-      return false;
-    }
-    return true;
-  }
-
-  function isUAH(val) {
-    return /uah/gi.test(val);
-  }
-
-  function isUSD(val) {
-    return /\$/.test(val);
-  }
-}
-
-//генерація випадкового паролю
-// len - довжина паролю, що задається користувачем
-// в мене створення інпутів звлежить від довжини параметрів функції, тому я не можу прописати len=8, я вже тестила
-function getRandomPassword(len) {
-  let str = '';
-  for (let i = 0; i < len; ++i) {
-    str += Math.floor(Math.random() * 10);
-  }
-  return str;
-}
-
-function deleteLetters(lett, word) {
-  const regExp = new RegExp(`${lett}`, 'ig');
-  return word.replace(regExp, '');
-}
-
-function isPalyndrom(str) {
-  const newStr = str.replace(/\s/g, '').toLowerCase();
-  for (let i = 0; i < Math.floor(newStr.length / 2); i++) {
-    if (newStr[i] === newStr[newStr.length - 1 - i]) {
-      continue;
-    } else {
-      return false;
-    }
-  }
-  return true;
-}
-
-function deleteDuplicateLetter(str) {
-  let newStr = str.replace(/\s/g, '').toLowerCase();
-  for (let i = 0; i < newStr.length; i++) {
-    if (matchChar(newStr, newStr[i])) {
-      newStr = remChar(newStr, newStr[i]);
-      --i;
-    }
-  }
-  return newStr;
-
-  function remChar(str, ch) {
-    return str.replaceAll(ch, '');
-  }
-
-  function matchChar(str, ch) {
-    let count = 0;
-    for (let i = 0; i < str.length; i++) {
-      str[i] === ch ? ++count : count;
-    }
-    return count > 1 ? true : false;
-  }
-}
-
+import {
+  getMaxDigit,
+  calcPow,
+  formatFirstLetterName,
+  salaryIncludTax,
+  getRandomNumber,
+  countLetter,
+  convertCurrency,
+  getRandomPassword,
+  deleteLetters,
+  isPalyndrom,
+  deleteDuplicateLetter,
+} from './common.js';
 //end
 //output
 const list = [
