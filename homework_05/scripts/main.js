@@ -1,4 +1,7 @@
 function getRandomArray(len, min, max) {
+  if (isNaN(len)) {
+    return;
+  }
   return new Array(len)
     .fill(0)
     .map((el) => Math.floor(Math.random() * (max - min) + min));
@@ -225,7 +228,7 @@ function createElement(item) {
           return parseInt(input.value, 10);
         }
         case 'string': {
-          if (/[0-9]$/.test(input.value)) {
+          if (!/[a-zA-Zа-яА-ЯіІ]$/.test(input.value)) {
             showPopup(
               `Invalid string`,
               input.offsetLeft,
@@ -241,7 +244,6 @@ function createElement(item) {
               input.offsetLeft,
               input.offsetTop + input.offsetHeight
             );
-            return input.value;
           }
           return input.value.split(',').map((el) => Number(el));
         }
@@ -254,6 +256,11 @@ function createElement(item) {
     item['type of output'] == 'number' || item['type of output'] == 'string'
       ? (output.textContent = `${String(result)}`)
       : (output.textContent = `[${String(result)}]`);
+    inputs.map((input) => {
+      if (input.value == '') {
+        output.textContent = '';
+      }
+    });
   });
 
   return template;
