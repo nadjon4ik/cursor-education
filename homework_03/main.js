@@ -242,14 +242,14 @@ function createElement(item) {
     const values = inputs.map((input, i) => {
       switch (item.validation[i]) {
         case 'number': {
-          if (!/^[+-]?[0-9]+$/.test(input.value)) {
+          if (!/^[+]?[0-9]+$/.test(input.value)) {
             error.innerHTML += `invalid integer "${input.value}" for argument ${i}<br>`;
             return input.value;
           }
           return parseInt(input.value, 10);
         }
         case 'float': {
-          if (!/^[+-]?([0-9]*[.])?[0-9]+$/.test(input.value)) {
+          if (!/^[+]?([0-9]*[.])?[0-9]+$/.test(input.value)) {
             error.innerHTML += `invalid float "${input.value}" for argument ${i}<br>`;
             return input.value;
           }
