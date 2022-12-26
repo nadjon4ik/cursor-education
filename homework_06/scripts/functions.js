@@ -1,100 +1,111 @@
 export {
-  getRandomArray,
-  getModa,
-  getAverage,
-  getMedian,
-  filterEvenNumbers,
-  countPositiveNumber,
-  getDividedByFive,
-  replaceBadWords,
-  dividedByThree,
-  getIntegerFromArray,
+  getSubjects,
+  outputGetStudentInfo,
+  getStudentsName,
+  getBestStudent,
+  calculateWordLetters,
+  getAverageMark,
+  getStudentInfo,
 };
-function getRandomArray(len, min, max) {
-  if (isNaN(len)) {
-    return;
-  }
-  return new Array(len)
-    .fill(0)
-    .map((el) => Math.floor(Math.random() * (max - min) + min));
+function getSubjects(item) {
+  const subjects = Object.keys(item.subjects);
+  return subjects
+    .map((el) => {
+      return firstLetterUpCase(el).replace('_', ' ');
+    })
+    .join(', ');
 }
 
-function getModa(arr) {
-  // function getIntegerFromArray(arr = []) {
-  //   return arr.filter((el) => Number.isInteger(el));
+function firstLetterUpCase(str) {
+  return str[0].toUpperCase() + str.slice(1).toLowerCase();
+}
+
+function getAverageMark(item) {
+  // function getAverage(arr) {
+  //   arr = [...arr];
+  //   return (
+  //     arr.reduce((acc, el) => {
+  //       return acc + el;
+  //     }) / arr.length
+  //   ).toFixed(2);
   // }
-  const integer = getIntegerFromArray(arr);
-  const mode = {};
-  let max = 0;
-  let count = 0;
-
-  for (let item of integer) {
-    if (mode.hasOwnProperty(item)) {
-      ++mode[item];
-    } else {
-      mode[item] = 1;
-    }
-
-    if (mode[item] > count) {
-      max = item;
-      count = mode[item];
-    }
-  }
-  return max;
+  const marks = Object.values(item.subjects);
+  return getAverage(marks.map((arr) => parseFloat(getAverage(arr), 10)));
 }
 
 function getAverage(arr) {
-  const integer = getIntegerFromArray(arr);
+  arr = [...arr];
   return (
-    integer.reduce((acc, item) => {
-      return acc + item;
-    }, 0) / integer.length
-  ).toFixed(1);
+    arr.reduce((acc, el) => {
+      return acc + el;
+    }) / arr.length
+  ).toFixed(2);
 }
 
-function getMedian(arr) {
-  const integer = getIntegerFromArray(arr);
-  const sorted = integer.sort((a, b) => a - b);
-  if (sorted.length % 2 != 0) {
-    return sorted[Math.floor(sorted.length / 2)];
-  }
-  return (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
-}
-
-function getIntegerFromArray(arr = []) {
-  return arr.filter((el) => Number.isInteger(el));
-}
-
-function filterEvenNumbers(arr) {
-  const integer = getIntegerFromArray(arr);
-  return integer.filter((el) => el % 2 !== 0);
-}
-
-function countPositiveNumber(arr) {
-  return arr.filter((el) => el > 0).length;
-}
-
-function getDividedByFive(arr) {
-  return arr.filter((el) => el % 5 == 0);
-}
-
-function replaceBadWords(str) {
-  const strArr = str.split(' ');
-  const badWord = /(shit|fuck)/gi;
-  const res = strArr.map((item) => {
-    if (badWord.test(item)) {
-      item = item.replace(badWord, '****');
-    }
-    return item;
-  });
-  return res.join(' ');
-}
-
-function dividedByThree(word) {
-  const newWord = word.trim().toLowerCase();
+//Ця функція для виведення результату на сторінку. По суті, функція працює лише return rest, але на виводі буде об'єкт, нічого кращо я не придумала))
+function parseObjectInArr(obj) {
   const res = [];
-  for (let i = 0; i < newWord.length; i += 3) {
-    res.push(newWord.substring(i, i + 3));
-  }
+  Object.entries(obj).map((el) => {
+    console.log();
+    res.push(`"${el[0]}": ${el[1]}`);
+  });
   return res;
+}
+
+function getStudentInfo(student) {
+  student.averageMark = getAverageMark(student);
+  const { subjects, ...rest } = student;
+  return rest;
+}
+
+function outputGetStudentInfo(student) {
+  student.averageMark = getAverageMark(student);
+  const { subjects, ...rest } = student;
+  return parseObjectInArr(rest);
+}
+
+function getStudentsName(students) {
+  const names = students.map((el) => {
+    const { name, ...rest } = el;
+    return name;
+  });
+  return names
+    .sort((a, b) => {
+      if (a < b) return -1;
+      if (a > b) return 1;
+      return 0;
+    })
+    .join(', ');
+}
+
+function getBestStudent(student) {
+  const resultsOfStudents = student.map((el) => {
+    const info = getStudentInfo(el);
+    const { course, ...rest } = info;
+    return rest;
+  });
+  const res = resultsOfStudents.reduce(
+    (result, item) => {
+      if (item.averageMark > result.maxAgv) {
+        result.maxAgv = item.averageMark;
+        result.name = item.name;
+      }
+      return result;
+    },
+    { name: '', maxAgv: 0 }
+  );
+  return res.name;
+}
+
+function calculateWordLetters(word) {
+  const str = word.toLowerCase().replaceAll(/\s/gi, '');
+  const res = {};
+  for (let ch of str) {
+    if (res.hasOwnProperty(ch)) {
+      ++res[ch];
+    } else {
+      res[ch] = 1;
+    }
+  }
+  return parseObjectInArr(res); //можна обійтись просто return res, але для виводу функції треба запарсити в масив
 }
