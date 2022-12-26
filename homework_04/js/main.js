@@ -1,11 +1,18 @@
 "use strict";
 import {
-  capitalizationСonversion,
   setDataStructure,
+  isFemale,
   getGirls,
   getBoys,
+  setRandomRangeMark,
   shuffle,
+  pick,
+  zip,
+  zip_pair,
+  bigger,
+  smaller,
   getPairs,
+  capitalizationСonversion,
 } from "./functions.js";
 function strToArray(value) {
   return value

@@ -1,4 +1,19 @@
-export function setDataStructure(names, themes, mark) {
+export {
+  setDataStructure,
+  isFemale,
+  getGirls,
+  getBoys,
+  setRandomRangeMark,
+  shuffle,
+  pick,
+  zip,
+  zip_pair,
+  bigger,
+  smaller,
+  getPairs,
+  capitalizationСonversion,
+};
+function setDataStructure(names, themes, mark) {
   const arr = [...names];
   const data = [];
   for (let i = 0; i < arr.length; i++) {
@@ -21,11 +36,11 @@ function isFemale(name) {
   return /(?:Естер|Есфір|Рут|Рут|Юдит|Юдиф)|я$|а$/gi.test(name);
 }
 
-export function getGirls(arr) {
+function getGirls(arr) {
   return arr.filter((name) => isFemale(name));
 }
 
-export function getBoys(arr) {
+function getBoys(arr) {
   return arr.filter((name) => !isFemale(name));
 }
 
@@ -33,7 +48,7 @@ function setRandomRangeMark(mark) {
   return Math.floor(Math.random() * (1 + mark - (mark - 1))) + mark - 1;
 }
 
-export function shuffle(arr) {
+function shuffle(arr) {
   arr = [...arr];
   let result = [];
   let len = arr.length;
@@ -90,7 +105,7 @@ function smaller(arr1, arr2) {
   }
   return arr1;
 }
-export function getPairs(arr1, arr2) {
+function getPairs(arr1, arr2) {
   const max = bigger(arr1, arr2);
   const min = smaller(arr1, arr2);
   const matched_arr = max.slice(0, min.length);
@@ -98,7 +113,7 @@ export function getPairs(arr1, arr2) {
   return pairs.concat(zip_pair(max.slice(min.length)));
 }
 
-export function capitalizationСonversion(arr = []) {
+function capitalizationСonversion(arr = []) {
   return arr.map((item) => {
     return item[0].toUpperCase() + item.slice(1).toLowerCase();
   });
