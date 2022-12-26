@@ -181,12 +181,18 @@ function createElement(item) {
     output.textContent = String(result);
 
     return inputs.map((el) => {
+      console.log(el.value);
       if (
         el.value == '' ||
+        (/^[0-9]/gi.test(el.value) && item.validation == 'string') ||
+        (/^([a-zA-zuah\s]|[а-яА-я]|\$)/gi && el.validation == 'number') ||
+        (el.value == '' && item.validation == 'string') ||
         (isNaN(el.value) && item.validation == 'number') ||
-        (Number(el.value) && item.validation == 'string')
-      )
+        (el.value == 'number' && item.validation == 'string')
+      ) {
+        console.log(typeof el.value);
         return (output.textContent = '');
+      }
     });
   });
 
