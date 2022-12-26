@@ -16,16 +16,13 @@ function strToArray(value) {
     .filter((str) => str !== "");
 }
 
-const input = document.querySelector(".input");
 const sudentsField = document.getElementById("students");
 const themesInput = document.getElementById("tasks");
 const labelThem = document.querySelector(".numb-them");
-const div = document.querySelector("#themes");
 const btnSetThemes = document.querySelector("#setThemes");
 const fieldset = document.querySelector(".marks");
 const wrapper = document.querySelector(".wrap");
 const refresh = document.querySelector(".st-refresh");
-const marks = [];
 const submit = document.querySelector(".btn-submit");
 const table = document.querySelector("table");
 const tbody = document.querySelector("tbody");
@@ -176,7 +173,6 @@ btnSetThemes.addEventListener("click", (e) => {
     for (let row of data) {
       const [name, theme, mark, res] = row;
       for (let ind of res) {
-        console.log(res);
         createTable(i++, ind[0], theme, ind[1]);
       }
     }
