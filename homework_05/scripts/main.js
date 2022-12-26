@@ -9,6 +9,7 @@ import {
   countPositiveNumber,
   replaceBadWords,
   dividedByThree,
+  getIntegerFromArray,
 } from './functions.js';
 // //output
 const list = [
@@ -184,7 +185,13 @@ function createElement(item) {
       ? (output.textContent = `${String(result)}`)
       : (output.textContent = `[${String(result)}]`);
     inputs.map((input) => {
-      if (input.value == '') {
+      if (
+        input.value == '' ||
+        (/^[0-9]/gi.test(input.value) && item.validation == 'string') ||
+        (/^([a-zA-Z]|[а-яА-Яіі])/gi && item.validation == 'number') ||
+        (/^([a-zA-Z]|[а-яА-Яіі])/gi && item.validation == 'integer') ||
+        (input.value = '' && item.validation == 'integer')
+      ) {
         output.textContent = '';
       }
     });

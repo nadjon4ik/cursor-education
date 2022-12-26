@@ -8,6 +8,7 @@ export {
   getDividedByFive,
   replaceBadWords,
   dividedByThree,
+  getIntegerFromArray,
 };
 function getRandomArray(len, min, max) {
   if (isNaN(len)) {
@@ -19,6 +20,9 @@ function getRandomArray(len, min, max) {
 }
 
 function getModa(arr) {
+  // function getIntegerFromArray(arr = []) {
+  //   return arr.filter((el) => Number.isInteger(el));
+  // }
   const integer = getIntegerFromArray(arr);
   const mode = {};
   let max = 0;
