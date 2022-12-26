@@ -13,34 +13,65 @@
   </head>
 
   <body>
-    <div>
-      <div class="modal hidden">
-        <button class="close-modal">&times;</button>
-        <p class="info-code"></p>
-      </div>
-      <div class="wrapper">
-        <template id="item-template">
-          <div class="context">
-            <form>
-              <span
-                class="material-symbols-outlined st-icon show-modal"
-                title="Review code"
-                >quick_reference</span
-              >
-              <span class="content">CONTENT</span>
-              <span class="func_name"></span>(<span class="dynamic"></span>)
-              <input type="submit" value="↲" class="btn-submit" />
-              <span class="st-output"></span>
-              <div class="error"></div>
-            </form>
-          </div>
-        </template>
-        <template id="text-input">
-          <input type="text" class="text-input input_value" />
-        </template>
-      </div>
-      <div class="overlay hidden"></div>
-      <script src="scripts/main.js" type="module"></script>
+    <div class="modal hidden">
+      <button class="close-modal">&times;</button>
+      <p class="info-code"></p>
     </div>
+    <div class="wrapper">
+      <div class="output_object">
+        <pre>
+const students = [
+              {
+                name: 'Tanya',
+                course: 3,
+                subjects: {
+                  math: [4, 4, 3, 4],
+                  algorithms: [3, 3, 3, 4, 4, 4],
+                  data_science: [5, 5, 3, 4],
+                },
+              },
+              {
+                name: 'Victor',
+                course: 4,
+                subjects: {
+                  physics: [5, 5, 5, 3],
+                  economics: [2, 3, 3, 3, 3, 5],
+                  geometry: [5, 5, 2, 3, 5],
+                },
+              },
+              {
+                name: 'Anton',
+                course: 2,
+                subjects: {
+                  statistics: [4, 5, 5, 5, 5, 3, 4, 3, 4, 5],
+                  english: [5, 3],
+                  cosmology: [5, 5, 5, 5],
+                },
+              },
+            ];</pre
+        >
+      </div>
+      <template id="item-template">
+        <div class="context">
+          <form>
+            <span
+              class="material-symbols-outlined st-icon show-modal"
+              title="Review code"
+              >quick_reference</span
+            >
+            <span class="content">CONTENT</span>
+            <span class="func_name"></span>(<span class="dynamic"></span>)
+            <input type="submit" value="↲" class="btn-submit" />
+            <span class="st-output hidden">&nbsp;</span>
+            <div class="error"></div>
+          </form>
+        </div>
+      </template>
+      <template id="text-input">
+        <input type="text" class="text-input input_value" />
+      </template>
+    </div>
+    <div class="overlay hidden"></div>
+    <script src="scripts/main.js" type="module"></script>
   </body>
 </html>

@@ -22,7 +22,7 @@ const list = [
     'type of output': '[]',
   },
   {
-    content: 'Функція №2 (Визначення моди масиву).',
+    content: 'Функція №2 (Функція №2 (Визначення моди масиву).',
     funcName: 'GetModa',
     action: getModa,
     validation: ['number'],

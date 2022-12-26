@@ -61,14 +61,6 @@ div {
   }
 }
 
-
-.error {
-  display: block;
-  color: red;
-  width: 100%;
-  padding: 0;
-}
-
 .output {
   font-weight: bold;
   font-style: italic;

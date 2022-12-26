@@ -23,7 +23,7 @@ const list = [
     validation: ['number'],
   },
   {
-    content: 'Функція №2 (Піднесення числа до степеня).',
+    content: 'Функція №2 (Функція №2 (Піднесення числа до степеня).',
     funcName: 'CalcPow',
     action: calcPow,
     placeholder: ['2', '2'],
