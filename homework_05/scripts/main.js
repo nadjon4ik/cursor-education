@@ -156,7 +156,7 @@ function createElement(item) {
           return parseInt(input.value, 10);
         }
         case 'string': {
-          if (!/[a-zA-Zа-яА-ЯіІ]$/.test(input.value)) {
+          if (!/([a-zA-Zа-яА-ЯіІ]|\?)/gi.test(input.value)) {
             showPopup(
               `Invalid string`,
               input.offsetLeft,
@@ -188,8 +188,8 @@ function createElement(item) {
       if (
         input.value == '' ||
         (/^[0-9]/gi.test(input.value) && item.validation == 'string') ||
-        (/^([a-zA-Z]|[а-яА-Яіі])/gi && item.validation == 'number') ||
-        (/^([a-zA-Z]|[а-яА-Яіі])/gi && item.validation == 'integer') ||
+        (/^([a-zA-Z]|[а-яА-ЯіІ]|\?)/gi && item.validation == 'number') ||
+        (/^([a-zA-Z]|[а-яА-ЯіІ]|\?)/gi && item.validation == 'integer') ||
         (input.value = '' && item.validation == 'integer')
       ) {
         output.textContent = '';
