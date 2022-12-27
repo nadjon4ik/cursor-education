@@ -154,7 +154,7 @@ function createElement(item) {
         case 'expression':
           if (!/[students]\[[0-2]\] |[students]/g.test(input.value)) {
             showPopup(
-              `Please, enter value as in a placeholder's`,
+              `Please, enter velue as in a placeholder's`,
               input.offsetLeft,
               input.offsetTop + input.offsetHeight
             );

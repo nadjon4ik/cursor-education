@@ -11,6 +11,8 @@ import {
   deleteLetters,
   isPalyndrom,
   deleteDuplicateLetter,
+  transformToNumber,
+  transformStringWithoutNumbers,
 } from './common.js';
 //end
 //output
@@ -20,49 +22,56 @@ const list = [
     funcName: 'GetMaxDigit',
     action: getMaxDigit,
     placeholder: ['1236'],
-    validation: ['number'],
+    args: 1,
+    info: `${getMaxDigit} \n ${transformToNumber}`,
   },
   {
     content: 'Функція №2 (Піднесення числа до степеня).',
     funcName: 'CalcPow',
     action: calcPow,
     placeholder: ['2', '2'],
-    validation: ['number', 'number'],
+    args: 2,
+    info: calcPow,
   },
   {
     content: 'Функція №3 (Форматування імені користувача).',
     funcName: 'FormatFirstLetterName',
     action: formatFirstLetterName,
     placeholder: ['вЛАД'],
-    validation: ['string'],
+    args: 1,
+    info: `${formatFirstLetterName} \n ${transformStringWithoutNumbers}`,
   },
   {
     content: 'Функція №4(Обчислнння заробітньої плати).',
     funcName: 'SalaryIncludTax',
     action: salaryIncludTax,
     placeholder: ['1000'],
-    validation: ['number'],
+    args: 1,
+    info: `${salaryIncludTax} \n ${transformToNumber}`,
   },
   {
     content: 'Функція №5(Генерування випадкового цілого числа).',
     funcName: 'GetRandomNumber',
     action: getRandomNumber,
     placeholder: ['1', '10'],
-    validation: ['number', 'number'],
+    args: 2,
+    info: `${getRandomNumber} \n ${transformToNumber}`,
   },
   {
     content: 'Функція №6(Розрахунок повторів букви у слові).',
     funcName: 'CountLetter',
     action: countLetter,
     placeholder: ['а', 'Асталавіста'],
-    validation: ['string', 'string'],
+    args: 2,
+    info: countLetter,
   },
   {
     content: 'Функція №7(Конвертація долару в гривні та навпаки).',
     funcName: 'ConvertCurrency',
     action: convertCurrency,
     placeholder: ['2500uAh', 25],
-    validation: ['no-validation', 'number'],
+    args: 2,
+    info: convertCurrency,
   },
   {
     content:
@@ -70,28 +79,32 @@ const list = [
     funcName: 'GetRandomPassword',
     action: getRandomPassword,
     placeholder: ['8'],
-    validation: ['number'],
+    args: 1,
+    info: getRandomPassword,
   },
   {
     content: 'Функція №9(Видалення задачної букви із речення).',
     funcName: 'DeleteLetters',
     action: deleteLetters,
     placeholder: ['a', 'blablablabla'],
-    validation: ['string', 'string'],
+    args: 2,
+    info: deleteLetters,
   },
   {
     content: 'Функція №10(Паліндром?).',
     funcName: 'IsPalyndrom',
     action: isPalyndrom,
     placeholder: ['я несу гусеня'],
-    validation: ['string'],
+    args: 1,
+    info: isPalyndrom,
   },
   {
     content: 'Функція №11(Видалення букв, що повторюються).',
     funcName: 'DeleteDuplicateLetter',
     action: deleteDuplicateLetter,
     placeholder: ['Бісківіт був дуже ніжним'],
-    validation: ['string'],
+    args: 1,
+    info: deleteDuplicateLetter,
   },
 ];
 const wrapper = document.querySelector('.wrapper');
@@ -110,7 +123,7 @@ function showPopup(content, x, y) {
     document.body.appendChild(d);
     setTimeout(() => {
       document.body.removeChild(d);
-    }, 1000);
+    }, 2000);
   }
 }
 
@@ -127,14 +140,14 @@ function createElement(item) {
   const dyn = template.querySelector('.dynamic');
 
   const icon = template.querySelector('.st-icon');
-  icon.dataset.code = encodeURIComponent(item.action.toString());
+  icon.dataset.code = item.info;
   icon.addEventListener('click', function () {
     const code = decodeURIComponent(this.dataset.code);
     const codeInfo = document.querySelector('.info-code');
     codeInfo.textContent = code;
   });
 
-  for (let i = 0; i < item.action.length; ++i) {
+  for (let i = 0; i < item.args; ++i) {
     const template = document
       .getElementById('text-input')
       .content.cloneNode(true);
@@ -149,47 +162,20 @@ function createElement(item) {
   submit.addEventListener('click', (e) => {
     e.preventDefault();
     const inputs = [...dyn.querySelectorAll('input')];
-    const values = inputs.map((input, i) => {
-      switch (item.validation[i]) {
-        case 'number': {
-          if (!/^[-0-9]+$/.test(input.value)) {
-            showPopup(
-              `Invalid number`,
-              input.offsetLeft,
-              input.offsetTop + input.offsetHeight
-            );
-          }
-          return parseInt(input.value, 10);
-        }
-        case 'string': {
-          if (!/^([a-zA-zuah\s]|[а-яА-я]|\$)/gi.test(input.value)) {
-            showPopup(
-              `Invalid string`,
-              input.offsetLeft,
-              input.offsetTop + input.offsetHeight
-            );
-          }
-          return input.value;
-        }
-        default: {
-          return input.value;
-        }
-      }
+    const values = inputs.map((input) => {
+      return input.value;
     });
 
     const result = item.action(...values);
     output.textContent = String(result);
 
     return inputs.map((el) => {
-      if (
-        el.value == '' ||
-        (/^[0-9]/gi.test(el.value) && item.validation == 'string') ||
-        (/^([a-zA-zuah\s]|[а-яА-я]|\$)/gi && el.validation == 'number') ||
-        (el.value == '' && item.validation == 'string') ||
-        (isNaN(el.value) && item.validation == 'number') ||
-        (el.value == 'number' && item.validation == 'string')
-      ) {
-        console.log(typeof el.value);
+      if (el.value == '') {
+        showPopup(
+          `Empty input, please, enter value!`,
+          el.offsetLeft,
+          el.offsetTop + el.offsetHeight
+        );
         return (output.textContent = '');
       }
     });

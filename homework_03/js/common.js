@@ -1,13 +1,18 @@
 export function getMaxDigit(maxValue) {
-  if (maxValue < 0) {
-    maxValue = String(maxValue).replace('-', '');
-  }
-  const arr = String(maxValue)
-    .split('')
-    .map((item) => parseInt(item, 10));
+  maxValue = transformToNumber(String(maxValue));
+  const arr = maxValue.split('').map((item) => parseInt(item, 10));
   return Math.max(...arr);
 }
 
+export function transformToNumber(str) {
+  const regExp = /[^\d+$]/g;
+  return str.replaceAll(regExp, '');
+}
+
+export function transformStringWithoutNumbers(str) {
+  const regExp = /[^\w+$]/g;
+  return str.replaceAll(regExp, '');
+}
 export function calcPow(num, pow) {
   if (pow < 0) {
     return 0;
@@ -20,20 +25,19 @@ export function calcPow(num, pow) {
 }
 
 export function formatFirstLetterName(str) {
-  if (/[0-9]/gi.test(str)) {
-    str = str.replaceAll(/[-0-9]/gi, '');
-  }
-  console.log(str);
-  if (str == '') return;
+  str = transformStringWithoutNumbers(str);
   return str[0].toUpperCase() + str.slice(1).toLowerCase();
 }
 
 export function salaryIncludTax(value) {
+  value = transformToNumber(value);
   return Math.floor(value - value * (19.5 / 100));
 }
 
-export function getRandomNumber(n, m) {
-  return Math.floor(Math.random() * (m - n + 1) + n);
+export function getRandomNumber(min, max) {
+  min = transformToNumber(min);
+  max = transformToNumber(max);
+  return Math.round(Math.random() * (max - min + 1) + min);
 }
 
 export function countLetter(lett, word) {
@@ -79,7 +83,7 @@ export function convertCurrency(value, exch) {
 //генерація випадкового паролю
 // len - довжина паролю, що задається користувачем
 // в мене створення інпутів звлежить від довжини параметрів функції, тому я не можу прописати len=8, я вже тестила
-export function getRandomPassword(len) {
+export function getRandomPassword(len = 8) {
   let str = '';
   for (let i = 0; i < len; ++i) {
     str += Math.floor(Math.random() * 10);
