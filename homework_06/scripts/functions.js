@@ -6,6 +6,7 @@ export {
   calculateWordLetters,
   getAverageMark,
   getStudentInfo,
+  getAverage,
 };
 function getSubjects(item) {
   const subjects = Object.keys(item.subjects);
@@ -21,16 +22,12 @@ function firstLetterUpCase(str) {
 }
 
 function getAverageMark(item) {
-  // function getAverage(arr) {
-  //   arr = [...arr];
-  //   return (
-  //     arr.reduce((acc, el) => {
-  //       return acc + el;
-  //     }) / arr.length
-  //   ).toFixed(2);
-  // }
   const marks = Object.values(item.subjects);
-  return getAverage(marks.map((arr) => parseFloat(getAverage(arr), 10)));
+  const marksArr = [];
+  marks.map((arr) => {
+    marksArr.push(...arr);
+  });
+  return getAverage(marksArr);
 }
 
 function getAverage(arr) {
@@ -60,8 +57,8 @@ function getStudentInfo(student) {
 
 function outputGetStudentInfo(student) {
   student.averageMark = getAverageMark(student);
-  const { subjects, ...rest } = student;
-  return parseObjectInArr(rest);
+  const { name, course, averageMark, ...rest } = student;
+  return parseObjectInArr({ course, name, averageMark });
 }
 
 function getStudentsName(students) {

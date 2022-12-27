@@ -7,6 +7,7 @@ import {
   calculateWordLetters,
   getAverageMark,
   getStudentInfo,
+  getAverage,
 } from './functions.js';
 
 const students = [
@@ -53,7 +54,7 @@ const list = [
     action: getAverageMark,
     placeholder: ['studets[0] ([1] чи [2])'],
     validation: ['expression'],
-    info: getAverageMark,
+    info: [`${getAverageMark} \n ${getAverage}`],
   },
   {
     content:
