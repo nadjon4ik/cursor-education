@@ -184,6 +184,14 @@ function createElement(item) {
     item['type of output'] == 'number' || item['type of output'] == 'string'
       ? (output.textContent = `${String(result)}`)
       : (output.textContent = `[${String(result)}]`);
+    inputs.map((input) => {
+      if (
+        input.value == '' ||
+        (/^[0-9]/gi.test(input.value) && item.validation == 'string')
+      ) {
+        output.textContent = '';
+      }
+    });
   });
 
   return template;
