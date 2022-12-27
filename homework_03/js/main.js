@@ -152,7 +152,7 @@ function createElement(item) {
     const values = inputs.map((input, i) => {
       switch (item.validation[i]) {
         case 'number': {
-          if (!/^[0-9]+$/.test(input.value)) {
+          if (!/^[-0-9]+$/.test(input.value)) {
             showPopup(
               `Invalid number`,
               input.offsetLeft,
@@ -181,7 +181,6 @@ function createElement(item) {
     output.textContent = String(result);
 
     return inputs.map((el) => {
-      console.log(el.value);
       if (
         el.value == '' ||
         (/^[0-9]/gi.test(el.value) && item.validation == 'string') ||

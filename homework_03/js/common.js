@@ -1,4 +1,7 @@
 export function getMaxDigit(maxValue) {
+  if (maxValue < 0) {
+    maxValue = String(maxValue).replace('-', '');
+  }
   const arr = String(maxValue)
     .split('')
     .map((item) => parseInt(item, 10));
@@ -7,7 +10,7 @@ export function getMaxDigit(maxValue) {
 
 export function calcPow(num, pow) {
   if (pow < 0) {
-    return '';
+    return 0;
   }
   let result = 1;
   for (let i = 0; i < pow; i++) {
@@ -17,6 +20,10 @@ export function calcPow(num, pow) {
 }
 
 export function formatFirstLetterName(str) {
+  if (/[0-9]/gi.test(str)) {
+    str = str.replaceAll(/[-0-9]/gi, '');
+  }
+  console.log(str);
   if (str == '') return;
   return str[0].toUpperCase() + str.slice(1).toLowerCase();
 }
