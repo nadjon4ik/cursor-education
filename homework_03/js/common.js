@@ -14,12 +14,16 @@ export function transformStringWithoutNumbers(str) {
   return str.replaceAll(regExp, '');
 }
 export function calcPow(num, pow) {
-  if (pow < 0) {
-    return 0;
+  if (Math.ceil(pow) > pow) {
+    throw new Error('Дозволено тільки цілі числа');
   }
+
   let result = 1;
-  for (let i = 0; i < pow; i++) {
+  for (let i = 0; i < Math.abs(pow); i++) {
     result *= num;
+  }
+  if (pow < 0) {
+    result = 1 / result;
   }
   return result;
 }

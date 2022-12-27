@@ -166,8 +166,13 @@ function createElement(item) {
       return input.value;
     });
 
-    const result = item.action(...values);
-    output.textContent = String(result);
+    try {
+      const result = item.action(...values);
+      output.textContent = String(result);
+    } catch (e) {
+      output.innerHTML = '&nbsp;';
+      showPopup(e, submit.offsetLeft, submit.offsetTop + submit.offsetHeight);
+    }
 
     return inputs.map((el) => {
       if (el.value == '') {
