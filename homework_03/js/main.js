@@ -81,6 +81,7 @@ const list = [
     placeholder: ['8'],
     args: 1,
     info: getRandomPassword,
+    value: 8,
   },
   {
     content: 'Функція №9(Видалення задачної букви із речення).',
@@ -153,6 +154,11 @@ function createElement(item) {
       .content.cloneNode(true);
     const inp = template.querySelector('.text-input');
     inp.setAttribute('placeholder', `${item.placeholder[i]}`);
+
+    if (item.funcName == `GetRandomPassword`) {
+      inp.setAttribute('value', '8');
+    }
+
     dyn.appendChild(inp);
   }
 
