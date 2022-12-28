@@ -7,6 +7,7 @@ export {
   getAverageMark,
   getStudentInfo,
   getAverage,
+  addAverageMartk,
 };
 function getSubjects(item) {
   const subjects = Object.keys(item.subjects);
@@ -43,22 +44,25 @@ function getAverage(arr) {
 function parseObjectInArr(obj) {
   const res = [];
   Object.entries(obj).map((el) => {
-    console.log();
     res.push(`"${el[0]}": ${el[1]}`);
   });
   return res;
 }
 
 function getStudentInfo(student) {
-  student.averageMark = getAverageMark(student);
+  addAverageMartk(student);
   const { subjects, ...rest } = student;
   return rest;
 }
 
 function outputGetStudentInfo(student) {
-  student.averageMark = getAverageMark(student);
+  addAverageMartk(student);
   const { name, course, averageMark, ...rest } = student;
   return parseObjectInArr({ course, name, averageMark });
+}
+
+function addAverageMartk(student) {
+  return (student.averageMark = getAverageMark(student));
 }
 
 function getStudentsName(students) {
