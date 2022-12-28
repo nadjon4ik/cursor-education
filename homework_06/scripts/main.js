@@ -165,7 +165,7 @@ function createElement(item) {
             return result(students);
           } catch (error) {
             showPopup(
-              `${error}`,
+              `Invalid value!`,
               input.offsetLeft,
               input.offsetTop + input.offsetHeight
             );
@@ -193,7 +193,7 @@ function createElement(item) {
     } catch (error) {
       inputs.map((input) => {
         showPopup(
-          `${error}`,
+          `Invalid value!`,
           input.offsetLeft,
           input.offsetTop + input.offsetHeight
         );
