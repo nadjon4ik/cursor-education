@@ -103,6 +103,7 @@ function showPopup(content, x, y) {
     setTimeout(() => {
       document.body.removeChild(d);
     }, 1000);
+    throw content;
   }
 }
 
@@ -146,7 +147,7 @@ function createElement(item) {
     const values = inputs.map((input, i) => {
       switch (item.validation[i]) {
         case 'integer': {
-          if (!/^[0-9]|\,$/.test(input.value)) {
+          if (/[^0-9]/.test(input.value)) {
             showPopup(
               `Invalid integer`,
               input.offsetLeft,
@@ -184,14 +185,6 @@ function createElement(item) {
     item['type of output'] == 'number' || item['type of output'] == 'string'
       ? (output.textContent = `${String(result)}`)
       : (output.textContent = `[${String(result)}]`);
-    inputs.map((input) => {
-      if (
-        input.value == '' ||
-        (/^[0-9]/gi.test(input.value) && item.validation == 'string')
-      ) {
-        output.textContent = '';
-      }
-    });
   });
 
   return template;

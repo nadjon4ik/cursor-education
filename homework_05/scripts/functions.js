@@ -25,22 +25,21 @@ function getModa(arr) {
   // }
   const integer = getIntegerFromArray(arr);
   const mode = {};
-  let max = 0;
-  let count = 0;
-
+  const getMode = [];
   for (let item of integer) {
     if (mode.hasOwnProperty(item)) {
       ++mode[item];
     } else {
       mode[item] = 1;
     }
-
-    if (mode[item] > count) {
-      max = item;
-      count = mode[item];
-    }
   }
-  return max;
+  const max = Math.max(...Object.values(mode).map((el) => parseInt(el)));
+  Object.entries(mode).map((item) => {
+    if (item[1] === max) {
+      getMode.push(item[0]);
+    }
+  });
+  return getMode;
 }
 
 function getAverage(arr) {
@@ -71,19 +70,23 @@ function filterEvenNumbers(arr) {
 }
 
 function countPositiveNumber(arr) {
-  return arr.filter((el) => el > 0).length;
+  const integer = getIntegerFromArray(arr);
+  return integer.filter((el) => el > 0).length;
 }
 
 function getDividedByFive(arr) {
   return arr.filter((el) => el % 5 == 0);
 }
 
-function replaceBadWords(str) {
+function replaceBadWords(str, word) {
+  if (typeof word === 'undefined' || word === '') {
+    word = 'fuck, shit';
+  }
   const strArr = str.split(' ');
-  const badWord = /(shit|fuck)/gi;
+  const regExp = new RegExp(`${word.split(/[\s,]+/).join('|')}`, 'gi');
   const res = strArr.map((item) => {
-    if (badWord.test(item)) {
-      item = item.replace(badWord, '****');
+    if (regExp.test(item)) {
+      item = item.replace(regExp, (match) => '*'.repeat(match.length));
     }
     return item;
   });
