@@ -33,7 +33,7 @@ function getModa(arr) {
       mode[item] = 1;
     }
   }
-  const max = Math.max(...Object.values(mode).map((el) => parseInt(el)));
+  const max = Math.max(...Object.values(mode));
   Object.entries(mode).map((item) => {
     if (item[1] === max) {
       getMode.push(item[0]);
