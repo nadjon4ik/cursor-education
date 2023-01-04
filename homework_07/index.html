@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <title>Functional programming in javascript</title>
+  </head>
+  <body>
+    <div class="modal hidden">
+      <button class="close-modal">&times;</button>
+      <p class="info-code"></p>
+    </div>
+    <div class="wrapper">
+      <div class="output_object">
+        <pre>
+    const ukraine = { 
+        tax: 0.195, 
+        middleSalary: 1789, 
+        vacancies: 11476 
+      };
+
+    const latvia = { 
+        tax: 0.25, 
+        middleSalary: 1586, 
+        vacancies: 3921 
+      };
+
+    const litva = { 
+        tax: 0.15, 
+        middleSalary: 1509, 
+        vacancies: 1114 
+      };
+  </pre
+        >
+      </div>
+      <template id="item-template">
+        <div class="context">
+          <form>
+            <span
+              class="material-symbols-outlined st-icon show-modal"
+              title="Review code"
+              >quick_reference</span
+            >
+            <span class="content">CONTENT</span>
+            <span class="func_name"></span>(<span class="dynamic"></span>)
+            <input type="submit" value="↲" class="btn-submit" />
+            <span class="st-output hidden">&nbsp;</span>
+          </form>
+        </div>
+      </template>
+      <template id="text-input">
+        <input type="text" class="text-input input_value" />
+      </template>
+    </div>
+    <div class="overlay hidden"></div>
+    <script src="./scripts/main.js" type="module"></script>
+  </body>
+</html>
