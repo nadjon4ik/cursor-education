@@ -5,7 +5,7 @@ import {
   getMiddleTaxes,
   getTotalTaxes,
   getMySalary,
-} from "./functions.js";
+} from "../../scripts/functions.js";
 
 const ukraine = {
   tax: 0.195,
