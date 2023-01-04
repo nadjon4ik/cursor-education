@@ -6,7 +6,7 @@ import {
 } from "./functions.js";
 
 ("use strict");
-// alert("Press F12");
+alert("Press F12");
 
 const ukraine = {
   tax: 0.195,
