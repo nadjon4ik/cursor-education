@@ -14,7 +14,7 @@ export function getMySalary(country) {
   const randomSalary = Math.floor(Math.random() * (2000 - 1500) + 1500);
   return {
     salary: randomSalary,
-    taxes: this.tax,
+    taxes: this.tax * randomSalary,
     profit: randomSalary - this.tax * randomSalary,
   };
 }
