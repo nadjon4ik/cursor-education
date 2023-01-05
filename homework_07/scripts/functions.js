@@ -45,16 +45,3 @@ export function createArray(ukr, lat, lit) {
     ["Litva", `${lit}`],
   ];
 }
-
-export function isNumber(num) {
-  while (num < 0 || Number.isNaN(num)) {
-    const conf = confirm("Do you enter valid salary?");
-    if (!conf) break;
-    num = setSalary();
-  }
-  return num;
-}
-
-function setSalary() {
-  return parseInt(prompt("Please, enter valid salary"), 10);
-}
