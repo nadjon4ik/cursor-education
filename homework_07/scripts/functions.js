@@ -1,5 +1,5 @@
 export function getMyTaxes(salary) {
-  return this.tax * salary;
+  return (this.tax * salary).toFixed(2);
 }
 
 export function getMiddleTaxes(country) {
@@ -44,4 +44,17 @@ export function createArray(ukr, lat, lit) {
     ["Latvia", `${lat}`],
     ["Litva", `${lit}`],
   ];
+}
+
+export function isNumber(num) {
+  while (num < 0 || Number.isNaN(num)) {
+    const conf = confirm("Do you enter valid salary?");
+    if (!conf) break;
+    num = setSalary();
+  }
+  return num;
+}
+
+function setSalary() {
+  return parseInt(prompt("Please, enter valid salary"), 10);
 }

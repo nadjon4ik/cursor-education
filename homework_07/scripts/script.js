@@ -7,6 +7,7 @@ import {
   getMySalary,
   showOutput,
   createArray,
+  isNumber,
 } from "./functions.js";
 
 const ukraine = {
@@ -27,7 +28,8 @@ const litva = {
   vacancies: 1114,
 };
 
-const salary = parseInt(prompt("Please, enter salary", 1000));
+const salary = isNumber(Number(prompt("Please, enter salary", 1000)));
+
 const ukrTaxes = getMyTaxes.call(ukraine, salary);
 const latTaxes = getMyTaxes.call(latvia, salary);
 const litTaxes = getMyTaxes.call(litva, salary);
