@@ -64,7 +64,6 @@ showOutput(arrayTotalTaxes);
 console.groupEnd();
 
 console.group("Calculation total taxes by countries");
-
 (function repeat() {
   const mySalaryInUkr = JSON.stringify(getMySalary.call(ukraine));
   const mySalaryInLat = JSON.stringify(getMySalary.call(latvia));
