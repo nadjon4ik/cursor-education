@@ -77,6 +77,6 @@ console.group("Calculation total taxes by countries");
   setTimeout(function () {
     showOutput(arraymySalary);
     repeat();
-  }, 5000);
+  }, 10000);
 })();
 console.groupEnd();
