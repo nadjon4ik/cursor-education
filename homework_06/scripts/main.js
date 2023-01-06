@@ -8,7 +8,6 @@ import {
   getAverageMark,
   getStudentInfo,
   getAverage,
-  addAverageMartk,
 } from './functions.js';
 
 const students = [
@@ -64,7 +63,7 @@ const list = [
     action: outputGetStudentInfo,
     placeholder: ['students[0]'],
     validation: ['expression'],
-    info: `${getStudentInfo} \n ${addAverageMartk}`,
+    info: getStudentInfo,
   },
   {
     content: 'Функція №4 (Повертає імена студентів в алфавітному порядку).',
