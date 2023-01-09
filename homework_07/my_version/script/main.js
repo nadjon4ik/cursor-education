@@ -202,11 +202,11 @@ function createElement(item) {
       item.originalFn = item.action;
     }
     item.action = getBound(select.value, item.originalFn);
-    const result = item.action.apply(null, values);
+    const result = item.action(values);
 
     if (item.funcName === "GetMySalary") {
       intervalOutput(() => {
-        const result = item.action.apply(null, values);
+        const result = item.action(select.value);
         output.classList.remove("hidden");
         output.innerHTML = JSON.stringify(result, null, 4);
       });

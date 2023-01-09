@@ -10,12 +10,12 @@ export function getTotalTaxes(country) {
   return this.tax * this.middleSalary * this.vacancies;
 }
 
-export function getMySalary(country) {
+export function getMySalary() {
   const randomSalary = Math.floor(Math.random() * (2000 - 1500) + 1500);
   return {
     salary: randomSalary,
-    taxes: (this.tax * randomSalary).toFixed(2),
-    profit: (randomSalary - this.tax * randomSalary).toFixed(2),
+    taxes: getMyTaxes.call(this, randomSalary),
+    profit: (randomSalary - getMyTaxes.call(this, randomSalary)).toFixed(2),
   };
 }
 
